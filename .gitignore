@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+dist
+coverage
+*.log
+*.tsbuildinfo
+.env*
+!.env.example
+
+# Large local archives
+/public/videos.zip
+/public/media/craftsmanship.zip

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title">
+  <title id="title">Subtle botanical line illustration</title>
+  <rect width="900" height="420" fill="none"/>
+  <g fill="none" stroke="#8e8c76" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".72">
+    <path d="M108 332C240 126 484 82 740 90"/>
+    <path d="M198 226c-2-42 20-73 63-91 4 44-18 76-63 91Z"/>
+    <path d="M300 164c14-41 47-62 96-63-10 43-42 65-96 63Z"/>
+    <path d="M420 124c22-31 57-42 103-30-20 34-55 44-103 30Z"/>
+    <path d="M538 103c26-22 61-27 104-9-26 26-61 30-104 9Z"/>
+    <path d="M660 94c29-16 60-13 94 8-30 19-61 16-94-8Z"/>
+    <path d="M248 201c31 5 54 22 70 51-33-2-56-19-70-51Z"/>
+    <path d="M380 143c36 9 62 30 78 64-39-4-65-25-78-64Z"/>
+    <path d="M520 110c38 12 63 37 76 75-40-8-66-33-76-75Z"/>
+  </g>
+</svg>
