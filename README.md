@@ -1,59 +1,142 @@
-# Elegant Star — Stage 8 Complete
+# Elegant Star — Invitations & Creation
 
-A static, database-free Next.js website for Elegant Star Invitations & Creation.
+A premium wedding and celebration stationery showcase website for **Elegant Star Invitations & Creation**. The project presents invitation collections, certificate folders, premium boxed sets, materials, celebration stories, galleries, and a guided enquiry experience.
 
-## Included experience
+## Live Demo
 
-1. Interactive Envelope Hero
-2. Seamless Brand Introduction
-3. Interactive Featured Collections
-4. Scroll-Driven Real Client Story
-5. Visual Category Explorer
-6. Interactive Craftsmanship Experience
-7. Simple Ordering Process
-8. Dynamic Albums and Gallery Preview
-9. Privacy-Safe Client Confidence Section
-10. Guided Enquiry Experience
+[View Elegant Star](https://elegant-star-3gk1.vercel.app/)
 
-## Public routes
+## Overview
 
-- `/` — complete advanced homepage
-- `/collections` — searchable and filterable library of 63 stationery directions
-- `/designs/[slug]` — 63 static collection pages
-- `/stories` — five privacy-safe real celebration stories
-- `/stories/[slug]` — five editorial story pages
-- `/gallery` — combined albums and visual library
-- `/our-craft` — materials, finishing and coordinated details
-- `/about` — brand and showroom story
-- `/contact` — contact options, FAQ and guided-enquiry link
+Elegant Star is a visually rich, editorial-style web experience designed to showcase custom invitation design and printing for weddings, traditional ceremonies, corporate events, and meaningful celebrations.
 
-## Content rules
+The site connects digital storytelling with real stationery craftsmanship. Visitors can browse collections, explore material details, view celebration stories, discover different invitation styles, and begin an enquiry through a simple guided process.
 
-- No couples’ real names are used in generated titles, URLs, source text, metadata or filenames.
-- Some names may remain naturally visible inside photographed physical stationery.
-- Collection specifications are not invented. Exact materials, finishes, price, quantity and timing must be confirmed during enquiry.
-- Review screenshots are not published until wording and identities are cleared.
+## Features
 
-## Editing
+* Premium responsive website for desktop, tablet, and mobile
+* Interactive invitation-envelope hero section
+* Featured invitation and stationery collections
+* Collection browsing with keyboard and touch-friendly interactions
+* Celebration story sections that connect stationery to real events
+* Category explorer for wedding invitations, certificate folders, heritage designs, premium box sets, and more
+* Craftsmanship showcase covering paper, texture, foil, embossing, ribbons, packaging, and customisation
+* Step-by-step ordering process
+* Gallery for collections and celebration stories
+* Privacy-safe testimonial presentation
+* Guided enquiry flow for occasion, product, style, and event details
+* Static content architecture with no database or CMS required
 
-- Deployment/contact environment variables: copy `.env.example` to a local `.env` file and fill in the real public values before production.
-- Contact details: `src/data/site.ts`
-- Collection data: `src/data/collections.ts`
-- Story data: `src/data/stories.ts`
-- Homepage category/craft/process/gallery content: `src/data/home.ts`
-- Media: `public/media`
+## Tech Stack
 
-## Commands
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* GSAP
+* Lucide Icons
+* Vercel
+
+## Main Sections
+
+* **Home** — Brand introduction and invitation hero experience
+* **Collections** — Curated stationery directions and product showcases
+* **Stories** — Celebration-focused visual storytelling
+* **Gallery** — Collection and event-inspired visual library
+* **Our Craft** — Materials, finishing details, and presentation features
+* **About** — Elegant Star brand and service information
+* **Contact / Enquiry** — Guided client enquiry experience
+
+## Project Structure
+
+```text
+src/
+  app/              # Next.js routes and pages
+  components/       # Reusable UI and interactive components
+  data/             # Static project content and collection data
+  lib/              # Utility functions
+  public/           # Images and static media assets
+```
+
+> The exact structure may vary depending on the current repository version.
+
+## Local Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Arrjack8847/REPOSITORY-NAME.git
+cd REPOSITORY-NAME
+```
+
+Install dependencies:
 
 ```bash
 npm install
-npm test
-npm run typecheck
-npm run lint
-npm run smoke
-npm run format:check
-npm run build
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-No database, CMS, authentication or API keys are required.
+Open the local site in your browser:
+
+```text
+http://localhost:3000
+```
+
+## Available Scripts
+
+```bash
+npm run dev      # Start local development server
+npm run build    # Create production build
+npm run start    # Run production server
+npm run lint     # Run lint checks
+```
+
+> Check `package.json` for the exact scripts available in this repository.
+
+## Deployment
+
+The project is deployed with **Vercel**.
+
+Live website: https://elegant-star-3gk1.vercel.app/
+
+## Screenshots
+
+Add screenshots of these sections here:
+
+* Interactive envelope hero
+* Featured collections
+* Celebration story section
+* Craftsmanship section
+* Guided enquiry flow
+* Mobile layout
+
+Example:
+
+```md
+![Elegant Star homepage](./public/screenshots/homepage.png)
+```
+
+## What I Learned
+
+* Building high-end editorial interfaces with reusable React components
+* Designing responsive layouts for both desktop and mobile experiences
+* Creating interactive web experiences with GSAP and modern frontend patterns
+* Organising a content-rich website with static TypeScript data
+* Building accessible interactions for keyboard, touch, and mouse users
+* Creating polished portfolio websites without requiring a database or CMS
+
+## Author
+
+**Soe Min Khant**
+
+* GitHub: [Arrjack8847](https://github.com/Arrjack8847)
+* Portfolio: [JackNex Studio](https://jack-nex-studio.vercel.app/)
+
+---
+
+© 2026 Elegant Star — Invitations & Creation.
