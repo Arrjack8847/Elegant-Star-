@@ -177,48 +177,59 @@ export function GuidedEnquiryExperience() {
    * sessionStorage keeps the information only in the current browser tab.
    */
   useEffect(() => {
-    try {
-      const savedDraft = window.sessionStorage.getItem(STORAGE_KEY);
+    let cancelled = false;
 
-      if (!savedDraft) {
+    const frame = window.requestAnimationFrame(() => {
+      if (cancelled) {
         return;
       }
 
-      const parsed = JSON.parse(savedDraft) as Partial<EnquiryDraft>;
+      try {
+        const savedDraft = window.sessionStorage.getItem(STORAGE_KEY);
 
-      const restoredOccasion =
-        typeof parsed.occasion === "string" ? parsed.occasion : "";
-      const restoredProduct =
-        typeof parsed.product === "string" ? parsed.product : "";
-      const restoredStyle =
-        typeof parsed.style === "string" ? parsed.style : "";
-      const restoredQuantity =
-        typeof parsed.quantity === "string" ? parsed.quantity : "";
-      const restoredDate =
-        typeof parsed.date === "string" ? parsed.date : "";
+        if (savedDraft) {
+          const parsed = JSON.parse(savedDraft) as Partial<EnquiryDraft>;
 
-      const requestedStep =
-        typeof parsed.step === "number" && Number.isFinite(parsed.step)
-          ? Math.min(LAST_STEP, Math.max(0, Math.floor(parsed.step)))
-          : 0;
+          const restoredOccasion =
+            typeof parsed.occasion === "string" ? parsed.occasion : "";
+          const restoredProduct =
+            typeof parsed.product === "string" ? parsed.product : "";
+          const restoredStyle =
+            typeof parsed.style === "string" ? parsed.style : "";
+          const restoredQuantity =
+            typeof parsed.quantity === "string" ? parsed.quantity : "";
+          const restoredDate =
+            typeof parsed.date === "string" ? parsed.date : "";
 
-      const availableStep = getHighestAvailableStep({
-        occasion: restoredOccasion,
-        product: restoredProduct,
-        style: restoredStyle,
-      });
+          const requestedStep =
+            typeof parsed.step === "number" && Number.isFinite(parsed.step)
+              ? Math.min(LAST_STEP, Math.max(0, Math.floor(parsed.step)))
+              : 0;
 
-      setOccasion(restoredOccasion);
-      setProduct(restoredProduct);
-      setStyle(restoredStyle);
-      setQuantity(restoredQuantity);
-      setDate(restoredDate);
-      setStep(Math.min(requestedStep, availableStep));
-    } catch {
-      window.sessionStorage.removeItem(STORAGE_KEY);
-    } finally {
-      setDraftReady(true);
-    }
+          const availableStep = getHighestAvailableStep({
+            occasion: restoredOccasion,
+            product: restoredProduct,
+            style: restoredStyle,
+          });
+
+          setOccasion(restoredOccasion);
+          setProduct(restoredProduct);
+          setStyle(restoredStyle);
+          setQuantity(restoredQuantity);
+          setDate(restoredDate);
+          setStep(Math.min(requestedStep, availableStep));
+        }
+      } catch {
+        window.sessionStorage.removeItem(STORAGE_KEY);
+      } finally {
+        setDraftReady(true);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {

@@ -9,5 +9,6 @@ coverage
 !.env.example
 
 # Large local archives
+*.zip
 /public/videos.zip
 /public/media/craftsmanship.zip

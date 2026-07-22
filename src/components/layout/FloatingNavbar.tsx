@@ -293,11 +293,11 @@ export function FloatingNavbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-5 z-50 px-4">
+      <header className="pointer-events-none fixed inset-x-0 top-[calc(0.75rem+env(safe-area-inset-top))] z-50 px-3 sm:top-[calc(1rem+env(safe-area-inset-top))] sm:px-4">
         <nav
           aria-label="Primary navigation"
           className={cn(
-            "pointer-events-auto mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between rounded-full px-4 py-2 shadow-[0_12px_40px_rgba(31,35,23,0.10)] transition-all duration-300 md:px-5",
+            "pointer-events-auto mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between rounded-full px-3 py-2 shadow-[0_12px_40px_rgba(31,35,23,0.10)] transition-all duration-300 sm:px-4 md:px-5",
             dark
               ? "glass-dark text-brand-ivory"
               : "glass-light text-brand-olive",
@@ -381,8 +381,8 @@ export function FloatingNavbar() {
         </nav>
       </header>
 
-      {/* Compact mobile popup — not full screen */}
-      <div className="pointer-events-none fixed inset-x-0 top-[5.75rem] z-[80] px-3 sm:top-[6rem] sm:px-4 lg:hidden">
+      {/* Compact mobile popup, not full screen */}
+      <div className="pointer-events-none fixed inset-x-0 top-[calc(5.25rem+env(safe-area-inset-top))] z-[80] px-3 sm:top-[calc(5.75rem+env(safe-area-inset-top))] sm:px-4 lg:hidden">
         <div className="mx-auto flex w-full max-w-6xl justify-end">
           <div
             id="mobile-menu"
@@ -394,7 +394,7 @@ export function FloatingNavbar() {
             inert={!isOpen}
             className={cn(
               "glass-light pointer-events-auto w-[min(22rem,calc(100vw_-_1.5rem))] origin-top-right overflow-y-auto overscroll-contain rounded-[24px] border border-brand-olive/10 p-3 shadow-[0_28px_80px_rgba(25,30,18,0.22)] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:rounded-[28px] sm:p-4",
-              "max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] sm:max-h-[calc(100dvh_-_7.25rem_-_env(safe-area-inset-bottom))]",
+              "max-h-[calc(100dvh_-_6rem_-_env(safe-area-inset-top)_-_env(safe-area-inset-bottom))] sm:max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-top)_-_env(safe-area-inset-bottom))]",
               isOpen
                 ? "translate-y-0 scale-100 opacity-100"
                 : "pointer-events-none -translate-y-3 scale-[0.96] opacity-0",

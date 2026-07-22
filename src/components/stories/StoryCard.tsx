@@ -13,6 +13,7 @@ export function StoryCard({
   return (
     <Link
       href={`/stories/${story.slug}`}
+      scroll={true}
       className="group motion-card-lift block rounded-[22px]"
     >
       <article>
@@ -24,6 +25,10 @@ export function StoryCard({
             alt={story.title}
             fill
             className="object-cover transition duration-700 motion-reduce:transition-none group-hover:scale-[1.03]"
+            style={{
+              objectPosition:
+                story.cardFocus ?? story.heroFocus?.desktop ?? "50% 50%",
+            }}
             sizes={
               large
                 ? "(max-width: 1024px) 100vw, 65vw"

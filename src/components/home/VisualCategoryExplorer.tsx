@@ -35,8 +35,8 @@ type TouchPoint = {
 /**
  * Convert the fixed tuple into a normal readonly array.
  *
- * Without this cast, TypeScript knows that categoryExplorer
- * contains exactly seven entries and types its length as `7`.
+ * Without this cast, TypeScript preserves the fixed tuple
+ * length instead of treating the data as a normal array.
  */
 const categories =
   categoryExplorer as readonly CategoryExplorerItem[];
@@ -195,16 +195,6 @@ export function VisualCategoryExplorer() {
       );
     };
   }, []);
-
-  /**
-   * Keep state valid if categories change during development
-   * or hot module replacement.
-   */
-  useEffect(() => {
-    if (active !== activeIndex) {
-      setActive(activeIndex);
-    }
-  }, [active, activeIndex]);
 
   /**
    * Automatically center the active mobile category tab

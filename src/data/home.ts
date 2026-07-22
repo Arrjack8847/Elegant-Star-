@@ -1,62 +1,70 @@
+import {
+  invitationCollections,
+  type CollectionCategory,
+} from "@/data/collections";
 import { siteMedia } from "@/data/siteMedia";
-export const categoryExplorer = [
+
+const homepageCategories = [
+  {
+    slug: "special-one",
+    title: "Special One",
+    description:
+      "Signature keepsake pieces and highlighted Elegant Star designs with a distinctive presentation character.",
+    filter: "Special One",
+  },
   {
     slug: "wedding-invitations",
     title: "Wedding Invitations",
     description:
-      "Complete invitation suites for intimate ceremonies and grand celebrations.",
-    image: siteMedia.homepage.categoryExplorer.weddingInvitations,
+      "Invitation cards and coordinated stationery for elegant wedding celebrations.",
     filter: "Wedding Invitations",
   },
   {
     slug: "certificate-folders",
     title: "Certificate Folders",
     description:
-      "Personalised folders created to hold and present meaningful ceremony documents.",
-    image: siteMedia.homepage.categoryExplorer.certificateFolders,
+      "Premium folders and keepsake covers for formal marriage documentation.",
     filter: "Certificate Folders",
   },
   {
-    slug: "traditional-heritage",
-    title: "Traditional & Heritage",
+    slug: "gifts-and-favours",
+    title: "Gifts & Favours",
     description:
-      "Rich ornamental directions inspired by formal traditions and ceremonial presentation.",
-    image: siteMedia.homepage.categoryExplorer.traditionalAndHeritage,
-    filter: "Traditional & Heritage",
+      "Return gifts, favour packaging and celebration accessories for special occasions.",
+    filter: "Gifts & Favours",
   },
   {
-    slug: "modern-minimal",
-    title: "Modern & Minimal",
+    slug: "corporate-official",
+    title: "Corporate & Official",
     description:
-      "Quiet typography, clean spacing and restrained finishing details.",
-    image: siteMedia.homepage.categoryExplorer.modernAndMinimal,
-    filter: "Modern & Minimal",
+      "Formal stationery and presentation pieces for corporate and official events.",
+    filter: "Corporate & Official",
   },
-  {
-    slug: "botanical-floral",
-    title: "Botanical & Floral",
-    description:
-      "Soft illustrated botanicals, romantic colour and graceful decorative framing.",
-    image: siteMedia.homepage.categoryExplorer.botanicalAndFloral,
-    filter: "Botanical & Floral",
-  },
-  {
-    slug: "premium-boxed-sets",
-    title: "Premium Boxed Sets",
-    description:
-      "Keepsake presentation with coordinated pieces and elevated packaging.",
-    image: siteMedia.homepage.categoryExplorer.premiumBoxedSets,
-    filter: "Premium Boxed Sets",
-  },
-  {
-    slug: "corporate-events",
-    title: "Corporate & Special Events",
-    description:
-      "Formal stationery directions for openings, launches and meaningful occasions.",
-    image: siteMedia.homepage.categoryExplorer.corporateAndSpecialEvents,
-    filter: "Corporate & Events",
-  },
-] as const;
+] satisfies readonly {
+  slug: string;
+  title: string;
+  description: string;
+  filter: CollectionCategory;
+}[];
+
+function collectionForCategory(category: CollectionCategory) {
+  return invitationCollections.find((collection) =>
+    collection.categories.includes(category),
+  );
+}
+
+function categoryImage(category: CollectionCategory, fallbackIndex = 0) {
+  return (
+    collectionForCategory(category)?.cardImage ??
+    invitationCollections[fallbackIndex]?.cardImage ??
+    "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg"
+  );
+}
+
+export const categoryExplorer = homepageCategories.map((category, index) => ({
+  ...category,
+  image: categoryImage(category.filter, index),
+}));
 
 export const craftsmanshipItems = [
   {
@@ -129,89 +137,7 @@ export const processSteps = [
   },
 ] as const;
 
-export const galleryPreviewItems = [
-  {
-    title: "Illustrated Romance",
-    type: "Collection",
-    filter: "Collections",
-    href: "/designs/illustrated-romance-suite",
-    image: siteMedia.homepage.galleryPreview.collectionIllustratedRomanceSuite,
-  },
-  {
-    title: "Royal Blue & Gold",
-    type: "Collection",
-    filter: "Collections",
-    href: "/designs/royal-blue-gold-suite",
-    image: siteMedia.homepage.galleryPreview.collectionRoyalBlueGoldSuite,
-  },
-  {
-    title: "Black Gold Heritage",
-    type: "Collection",
-    filter: "Collections",
-    href: "/designs/black-gold-bird-heritage-suite",
-    image:
-      siteMedia.homepage.galleryPreview.collectionBlackGoldBirdHeritageSuite,
-  },
-  {
-    title: "Green Botanical",
-    type: "Collection",
-    filter: "Collections",
-    href: "/designs/green-venue-botanical-suite",
-    image: siteMedia.homepage.galleryPreview.collectionGreenVenueBotanicalSuite,
-  },
-  {
-    title: "A Blush Garden Celebration",
-    type: "Story",
-    filter: "Stories",
-    href: "/stories/a-blush-garden-celebration",
-    image: siteMedia.homepage.galleryPreview.storyABlushGardenCelebration,
-  },
-  {
-    title: "Modern Garden Vows",
-    type: "Story",
-    filter: "Stories",
-    href: "/stories/modern-garden-vows",
-    image: siteMedia.homepage.galleryPreview.storyModernGardenVows,
-  },
-  {
-    title: "An Ivory Ballroom Story",
-    type: "Story",
-    filter: "Stories",
-    href: "/stories/an-ivory-ballroom-story",
-    image: siteMedia.homepage.galleryPreview.storyAnIvoryBallroomStory,
-  },
-  {
-    title: "Vows by the Sea",
-    type: "Story",
-    filter: "Stories",
-    href: "/stories/vows-by-the-sea",
-    image: siteMedia.homepage.galleryPreview.storyVowsByTheSea,
-  },
-] as const;
-
-export const enquiryStyles = [
-  {
-    value: "Botanical",
-    image: siteMedia.homepage.enquiry.botanical,
-  },
-  {
-    value: "Modern",
-    image: siteMedia.homepage.enquiry.modern,
-  },
-  {
-    value: "Traditional",
-    image: siteMedia.homepage.enquiry.traditional,
-  },
-  {
-    value: "Romantic",
-    image: siteMedia.homepage.enquiry.romantic,
-  },
-  {
-    value: "Minimal",
-    image: siteMedia.homepage.enquiry.minimal,
-  },
-  {
-    value: "Luxury",
-    image: siteMedia.homepage.enquiry.luxury,
-  },
-] as const;
+export const enquiryStyles = homepageCategories.map((category, index) => ({
+  value: category.title,
+  image: categoryImage(category.filter, index),
+}));

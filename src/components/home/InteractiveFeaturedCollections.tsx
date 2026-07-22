@@ -429,16 +429,6 @@ export function InteractiveFeaturedCollections() {
     });
   }, [reducedMotion, safeActiveIndex]);
 
-  /*
-   * Keep activeIndex valid when data changes during
-   * development or hot module replacement.
-   */
-  useEffect(() => {
-    if (activeIndex !== safeActiveIndex) {
-      setActiveIndex(safeActiveIndex);
-    }
-  }, [activeIndex, safeActiveIndex]);
-
   useEffect(() => {
     return () => {
       clearHoverTimer();
@@ -815,7 +805,7 @@ export function InteractiveFeaturedCollections() {
                 "xl:text-[3.55rem]",
               )}
             >
-              Six directions.{" "}
+              Real-post directions.{" "}
               <span className="block">
                 Many ways to personalise.
               </span>

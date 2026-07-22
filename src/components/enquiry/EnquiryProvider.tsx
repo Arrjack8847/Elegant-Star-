@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { contactDetails, siteConfig } from "@/data/site";
 import { createEnquiryMessage, type EnquiryContext } from "@/lib/enquiry";
+import { copyText } from "@/lib/copyText";
 import { Button } from "@/components/ui/Button";
 import {
   gsap,
@@ -240,41 +241,15 @@ function EnquirySheet({
   }, [handleClose]);
 
   const copyMessage = async () => {
-    let didCopy = false;
+    const result = await copyText(message);
 
-    if (navigator.clipboard?.writeText) {
-      try {
-        await navigator.clipboard.writeText(message);
-        didCopy = true;
-      } catch {
-        didCopy = false;
-      }
+    if (!result.ok) {
+      messageRef.current?.focus();
+      messageRef.current?.select();
     }
 
-    if (!didCopy) {
-      const textarea = messageRef.current;
-      textarea?.focus();
-      textarea?.select();
-      if (navigator.clipboard?.writeText) {
-        try {
-          await navigator.clipboard.writeText(message);
-          didCopy = true;
-        } catch {
-          didCopy = false;
-        }
-      }
-
-      if (!didCopy) {
-        try {
-          didCopy = document.execCommand("copy");
-        } catch {
-          didCopy = false;
-        }
-      }
-    }
-
-    setCopied(didCopy);
-    setCopyFailed(!didCopy);
+    setCopied(result.ok);
+    setCopyFailed(!result.ok);
   };
 
   const contactActions = [

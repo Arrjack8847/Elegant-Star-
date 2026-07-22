@@ -167,6 +167,10 @@ a[aria-disabled="true"] {
   max-width: 100%;
   padding: clamp(5rem, 10vw, 9rem) 0;
 }
+.design-detail-hero {
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+}
 
 .section-inner {
   width: min(1180px, calc(100% - 2rem));

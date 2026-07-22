@@ -46,6 +46,23 @@ const facebook = {
   href: "https://www.facebook.com/share/1CswnjjZyQ/?mibextid=wwXIfr",
 } as const;
 
+const messengerPageId = "61564479194348";
+
+const messenger = {
+  label: "Messenger",
+  value: "Elegant Star Messenger",
+  pageId: messengerPageId,
+  href: `https://m.me/${messengerPageId}`,
+} as const;
+
+const viber = {
+  label: "Viber",
+  displayNumber: "+959678884898",
+  number: "959678884898",
+  href: `viber://chat?number=${encodeURIComponent("+959678884898")}`,
+  fallbackUrl: "https://viber.me/959678884898",
+} as const;
+
 const maps = {
   label: "Google Maps",
   value: "Elegant Star Invitations & Creation showroom",
@@ -79,22 +96,22 @@ const optionalMessagingChannels = (
   [
     {
       kind: "messenger",
-      label: "Messenger",
-      value: "Messenger",
+      label: messenger.label,
+      value: messenger.value,
       description: "Send a quick direct message with references or questions.",
       action: "Open Messenger",
-      href: publicEnv("NEXT_PUBLIC_CONTACT_MESSENGER_URL"),
+      href: messenger.href,
       external: true,
       layout: "wide",
     },
     {
       kind: "viber",
-      label: "Viber",
-      value: "Viber",
+      label: viber.label,
+      value: viber.displayNumber,
       description:
         "Message the studio directly when a Viber link is available.",
       action: "Open Viber",
-      href: publicEnv("NEXT_PUBLIC_CONTACT_VIBER_URL"),
+      href: viber.href,
       external: true,
       layout: "wide",
     },
@@ -178,11 +195,21 @@ export const contactDetails = {
   email,
   instagram,
   facebook,
+  messenger,
+  viber,
   maps,
   mapsUrl: maps.href,
   mapsEmbedUrl: maps.embedUrl,
-  messengerUrl: publicEnv("NEXT_PUBLIC_CONTACT_MESSENGER_URL"),
-  viberUrl: publicEnv("NEXT_PUBLIC_CONTACT_VIBER_URL"),
+  messengerPageId: messenger.pageId,
+  messengerUrl: messenger.href,
+  viberDisplayNumber: viber.displayNumber,
+  viberNumber: viber.number,
+  viberUrl: viber.href,
+  viberFallbackUrl: viber.fallbackUrl,
+  productionSiteUrl: publicEnv(
+    "NEXT_PUBLIC_SITE_URL",
+    "https://elegant-star-3gk1.vercel.app",
+  ),
   whatsappUrl: publicEnv("NEXT_PUBLIC_CONTACT_WHATSAPP_URL"),
   address: publicEnv("NEXT_PUBLIC_CONTACT_ADDRESS", maps.value),
   openingHours: publicEnv("NEXT_PUBLIC_OPENING_HOURS"),
@@ -205,7 +232,6 @@ export const navigation = [
   { label: "Home", href: "/" },
   { label: "Collections", href: "/collections" },
   { label: "Stories", href: "/stories" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Our Craft", href: "/our-craft" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
