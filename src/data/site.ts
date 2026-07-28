@@ -1,11 +1,41 @@
 import { siteMedia } from "@/data/siteMedia";
 
-function publicEnv(name: string, fallback = "") {
-  return process.env[name]?.trim() || fallback;
+function envValue(value: string | undefined, fallback = "") {
+  return value?.trim() || fallback;
 }
+
+/*
+ * NEXT_PUBLIC variables must be referenced directly so Next.js can include
+ * them correctly in client-side bundles.
+ */
+const publicConfig = {
+  siteUrl: envValue(
+    process.env.NEXT_PUBLIC_SITE_URL,
+    "https://elegant-star-3gk1.vercel.app",
+  ),
+  messengerUrl: envValue(
+    process.env.NEXT_PUBLIC_CONTACT_MESSENGER_URL,
+  ),
+  messengerUsername: envValue(
+    process.env.NEXT_PUBLIC_CONTACT_MESSENGER_USERNAME,
+  ),
+  viberUrl: envValue(
+    process.env.NEXT_PUBLIC_CONTACT_VIBER_URL,
+  ),
+  whatsappUrl: envValue(
+    process.env.NEXT_PUBLIC_CONTACT_WHATSAPP_URL,
+  ),
+  address: envValue(
+    process.env.NEXT_PUBLIC_CONTACT_ADDRESS,
+  ),
+  openingHours: envValue(
+    process.env.NEXT_PUBLIC_OPENING_HOURS,
+  ),
+} as const;
 
 function phoneHref(phone: string) {
   const dialable = phone.replace(/[^\d+]/g, "");
+
   return dialable ? `tel:${dialable}` : "";
 }
 
@@ -46,21 +76,41 @@ const facebook = {
   href: "https://www.facebook.com/share/1CswnjjZyQ/?mibextid=wwXIfr",
 } as const;
 
+/*
+ * Add NEXT_PUBLIC_CONTACT_MESSENGER_USERNAME when the official Facebook
+ * username is known. The numeric Page ID remains as a fallback.
+ *
+ * A complete Messenger URL can also be supplied through:
+ * NEXT_PUBLIC_CONTACT_MESSENGER_URL
+ */
 const messengerPageId = "61564479194348";
+
+const messengerTarget =
+  publicConfig.messengerUsername || messengerPageId;
 
 const messenger = {
   label: "Messenger",
   value: "Elegant Star Messenger",
   pageId: messengerPageId,
-  href: `https://m.me/${messengerPageId}`,
+  username: publicConfig.messengerUsername,
+  href:
+    publicConfig.messengerUrl ||
+    `https://m.me/${messengerTarget}`,
 } as const;
+
+/*
+ * Use the HTTPS Viber link as the primary URL.
+ * It is more reliable on mobile than a viber:// custom scheme.
+ */
+const viberNumber = "959678884898";
+const viberWebUrl = `https://viber.me/${viberNumber}`;
 
 const viber = {
   label: "Viber",
-  displayNumber: "+959678884898",
-  number: "959678884898",
-  href: `viber://chat?number=${encodeURIComponent("+959678884898")}`,
-  fallbackUrl: "https://viber.me/959678884898",
+  displayNumber: "+95 9 678 884898",
+  number: viberNumber,
+  href: publicConfig.viberUrl || viberWebUrl,
+  fallbackUrl: viberWebUrl,
 } as const;
 
 const maps = {
@@ -88,7 +138,15 @@ export type ContactChannel = {
   description: string;
   action: string;
   href: string;
+
+  /*
+   * The contact page currently uses this field to decide whether it should
+   * open the link in a new browser tab.
+   *
+   * App links such as Messenger, Viber and WhatsApp should remain false.
+   */
   external: boolean;
+
   layout: "featured" | "wide";
 };
 
@@ -98,10 +156,15 @@ const optionalMessagingChannels = (
       kind: "messenger",
       label: messenger.label,
       value: messenger.value,
-      description: "Send a quick direct message with references or questions.",
+      description:
+        "Send a direct message with reference images or questions.",
       action: "Open Messenger",
       href: messenger.href,
-      external: true,
+
+      /*
+       * Do not open Messenger in a new tab on mobile.
+       */
+      external: false,
       layout: "wide",
     },
     {
@@ -109,10 +172,14 @@ const optionalMessagingChannels = (
       label: viber.label,
       value: viber.displayNumber,
       description:
-        "Message the studio directly when a Viber link is available.",
+        "Open a direct Viber conversation with the studio.",
       action: "Open Viber",
       href: viber.href,
-      external: true,
+
+      /*
+       * Do not create a blank tab before opening Viber.
+       */
+      external: false,
       layout: "wide",
     },
     {
@@ -120,14 +187,14 @@ const optionalMessagingChannels = (
       label: "WhatsApp",
       value: "WhatsApp",
       description:
-        "Message the studio directly when a WhatsApp link is available.",
+        "Open a direct WhatsApp conversation with the studio.",
       action: "Open WhatsApp",
-      href: publicEnv("NEXT_PUBLIC_CONTACT_WHATSAPP_URL"),
-      external: true,
+      href: publicConfig.whatsappUrl,
+      external: false,
       layout: "wide",
     },
   ] satisfies ContactChannel[]
-).filter((channel) => channel.href);
+).filter((channel) => Boolean(channel.href));
 
 export const contactChannels: ContactChannel[] = [
   {
@@ -145,7 +212,8 @@ export const contactChannels: ContactChannel[] = [
     kind: "facebook",
     label: facebook.label,
     value: facebook.value,
-    description: "Visit the official Facebook page for updates and enquiries.",
+    description:
+      "Visit the official Facebook page for updates and enquiries.",
     action: "Open Facebook",
     href: facebook.href,
     external: true,
@@ -177,7 +245,8 @@ export const contactChannels: ContactChannel[] = [
     kind: "phone",
     label: additionalPhone.label,
     value: additionalPhone.value,
-    description: "An additional contact number for direct assistance.",
+    description:
+      "An additional contact number for direct assistance.",
     action: "Call this number",
     href: additionalPhone.href,
     external: false,
@@ -190,29 +259,35 @@ export const contactDetails = {
   primaryPhone,
   additionalPhone,
   phones: [primaryPhone, additionalPhone],
+
   phone: primaryPhone.value,
   phoneHref: primaryPhone.href,
+
   email,
   instagram,
   facebook,
   messenger,
   viber,
   maps,
+
   mapsUrl: maps.href,
   mapsEmbedUrl: maps.embedUrl,
+
   messengerPageId: messenger.pageId,
+  messengerUsername: messenger.username,
   messengerUrl: messenger.href,
+
   viberDisplayNumber: viber.displayNumber,
   viberNumber: viber.number,
   viberUrl: viber.href,
   viberFallbackUrl: viber.fallbackUrl,
-  productionSiteUrl: publicEnv(
-    "NEXT_PUBLIC_SITE_URL",
-    "https://elegant-star-3gk1.vercel.app",
-  ),
-  whatsappUrl: publicEnv("NEXT_PUBLIC_CONTACT_WHATSAPP_URL"),
-  address: publicEnv("NEXT_PUBLIC_CONTACT_ADDRESS", maps.value),
-  openingHours: publicEnv("NEXT_PUBLIC_OPENING_HOURS"),
+
+  productionSiteUrl: publicConfig.siteUrl,
+  whatsappUrl: publicConfig.whatsappUrl,
+
+  address: publicConfig.address || maps.value,
+  openingHours: publicConfig.openingHours,
+
   channels: contactChannels,
 };
 
@@ -240,16 +315,22 @@ export const navigation = [
 export const companyCopy = {
   homeStatement:
     "Elegant Star brings together invitation design, certificate folders, coordinated pieces and finishing details so every celebration begins with a thoughtful first impression.",
+
   brandStory:
     "The work starts with the feeling of the occasion, then moves through wording, format, colour, paper character and presentation.",
+
   aboutIntro:
     "Elegant Star is an invitation and stationery studio creating customisable pieces for weddings, family ceremonies, openings and special events.",
+
   approach:
     "Customers can begin with an existing direction or share references. The team then helps shape wording, colour, format and coordinated pieces around the occasion.",
+
   collaboration:
     "Every photographed design is a starting point. Exact materials, finishing methods, quantities and timelines are confirmed during enquiry.",
+
   studio:
     "The website uses real Elegant Star product, showroom and celebration photography while keeping client identities private in public titles and metadata.",
+
   contactMessage:
     "Share the collection reference, event type, preferred quantity, date and any colour or wording ideas.",
 };
@@ -266,7 +347,8 @@ export const faqItems = [
       "Many directions can be adapted. The suitable options depend on the chosen format, artwork and finishing details.",
   },
   {
-    question: "Do you create certificate folders and coordinated pieces?",
+    question:
+      "Do you create certificate folders and coordinated pieces?",
     answer:
       "Yes. The library includes invitation suites, marriage certificate folders, fans, boxes and coordinated stationery.",
   },
@@ -276,7 +358,8 @@ export const faqItems = [
       "Send a collection reference, quantity, event date and customisation notes through the available contact method.",
   },
   {
-    question: "Are all photographed finishes always available?",
+    question:
+      "Are all photographed finishes always available?",
     answer:
       "Availability, materials and timelines should be confirmed with the Elegant Star team before ordering.",
   },
