@@ -95,6 +95,19 @@ const enquiryChecklist = [
   "Estimated quantity and required date",
 ] as const;
 
+function shouldOpenNewTab(
+  kind: ContactChannelKind,
+  external: boolean,
+) {
+  const mobileMessagingChannels: ContactChannelKind[] = [
+    "messenger",
+    "viber",
+    "whatsapp",
+  ];
+
+  return external && !mobileMessagingChannels.includes(kind);
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   PAGE                                     */
 /* -------------------------------------------------------------------------- */
@@ -242,6 +255,10 @@ export default function ContactPage() {
           >
             {contactChannels.map((channel) => {
               const Icon = contactIconByKind[channel.kind];
+              const openNewTab = shouldOpenNewTab(
+                channel.kind,
+                channel.external,
+              );
 
               return (
                 <article
@@ -312,11 +329,12 @@ export default function ContactPage() {
 
                   <a
                     href={channel.href}
-                    target={channel.external ? "_blank" : undefined}
-                    rel={channel.external ? "noopener noreferrer" : undefined}
+                    target={openNewTab ? "_blank" : undefined}
+                    rel={openNewTab ? "noopener noreferrer" : undefined}
+                    aria-label={`${channel.action}: ${channel.value}`}
                     className={cn(
                       "mt-7 inline-flex min-h-11",
-                      "items-center gap-2",
+                      "touch-manipulation items-center gap-2",
                       "rounded-full",
                       "border border-brand-olive",
                       "bg-brand-olive px-5",
@@ -443,7 +461,7 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className={cn(
                   "group mt-8 inline-flex min-h-12 w-fit",
-                  "items-center gap-3",
+                  "touch-manipulation items-center gap-3",
                   "rounded-full",
                   "bg-brand-olive px-6",
                   "text-sm font-bold text-brand-white",
