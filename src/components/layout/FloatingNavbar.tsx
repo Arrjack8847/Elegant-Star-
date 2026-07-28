@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   type ComponentType,
+  type MouseEvent,
   type SVGProps,
 } from "react";
 import Image from "next/image";
@@ -177,6 +178,23 @@ export function FloatingNavbar() {
     }
   }, []);
 
+  const handleHomeClick = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      closeMenu();
+
+      if (pathname === "/") {
+        event.preventDefault();
+
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+    },
+    [closeMenu, pathname],
+  );
+
   const toggleMenu = useCallback(() => {
     if (isOpen) {
       closeMenu();
@@ -305,6 +323,8 @@ export function FloatingNavbar() {
         >
           <Link
             href="/"
+            scroll
+            onClick={handleHomeClick}
             aria-label="Elegant Star home"
             className="flex min-w-0 items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage"
           >
@@ -330,6 +350,8 @@ export function FloatingNavbar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  scroll
+                  onClick={item.href === "/" ? handleHomeClick : undefined}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage",
@@ -403,8 +425,9 @@ export function FloatingNavbar() {
             <div className="flex items-center justify-between gap-4">
               <Link
                 href="/"
+                scroll
                 aria-label="Elegant Star home"
-                onClick={() => closeMenu({ restoreFocus: true })}
+                onClick={handleHomeClick}
                 className="flex min-w-0 items-center gap-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage"
               >
                 <Image
@@ -442,7 +465,11 @@ export function FloatingNavbar() {
                     key={item.href}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    onClick={() => closeMenu({ restoreFocus: true })}
+                    onClick={
+                      item.href === "/"
+                        ? handleHomeClick
+                        : () => closeMenu()
+                    }
                     className={cn(
                       "group flex min-h-12 items-center justify-between rounded-2xl px-4 py-3 text-base font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage",
                       active
