@@ -67,9 +67,6 @@ export const elegantStarMediaAudit = {
     "certificate-folders/gold-detail-certificate-holder",
     "certificate-folders/ivory-velvet-wooden-art-certificate-holder",
     "certificate-folders/ivory-velvet-wooden-art-marriage-certificate-holder",
-    "certificate-folders/jute-burlap-certificate-folder",
-    "certificate-folders/jute-burlap-marriage-certificate-folder-collection",
-    "certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder",
     "certificate-folders/luxury-timeless-velvet-certificate-holder",
     "certificate-folders/myanmar-kanok-velvet-certificate",
     "certificate-folders/premium-signing-day-marriage-certificate",
@@ -181,9 +178,6 @@ export const elegantStarMediaAudit = {
     "wedding-invitations/ivory-cotton-paper-gold-embossed-monogram-invitation",
   ],
   videoOnlyFolders: [
-    "certificate-folders/jute-burlap-certificate-folder",
-    "certificate-folders/jute-burlap-marriage-certificate-folder-collection",
-    "certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder",
     "certificate-folders/rose-gold-christmas-certificate-folder",
   ],
 } as const;
@@ -1713,11 +1707,15 @@ export const elegantStarCollections = [
     description:
       "Jute Burlap Certificate Folder is an Elegant Star certificate folder direction created for formal presentation, keepsake storage and personalised finishing.",
     coverImage:
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/jute-burlap-certificate-folder/cover.JPG",
+    cover1:
+      "/media/collections/certificate-folders/jute-burlap-certificate-folder/cover.JPG",
     gallery: [
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/jute-burlap-certificate-folder/cover.JPG",
     ],
-    images: [],
+    images: [
+      "/media/collections/certificate-folders/jute-burlap-certificate-folder/cover.JPG",
+    ],
     videos: [
       "/media/collections/certificate-folders/jute-burlap-certificate-folder/jute-burlap-certificate-folder-video-01.mp4",
     ],
@@ -1731,11 +1729,15 @@ export const elegantStarCollections = [
     description:
       "Jute Burlap Marriage Certificate Folder Collection is an Elegant Star certificate folder direction created for formal presentation, keepsake storage and personalised finishing.",
     coverImage:
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/jute-burlap-marriage-certificate-folder-collection/Cover.JPG",
+    cover1:
+      "/media/collections/certificate-folders/jute-burlap-marriage-certificate-folder-collection/Cover.JPG",
     gallery: [
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/jute-burlap-marriage-certificate-folder-collection/Cover.JPG",
     ],
-    images: [],
+    images: [
+      "/media/collections/certificate-folders/jute-burlap-marriage-certificate-folder-collection/Cover.JPG",
+    ],
     videos: [
       "/media/collections/certificate-folders/jute-burlap-marriage-certificate-folder-collection/jute-burlap-marriage-certificate-folder-collection-video-01.mp4",
     ],
@@ -1749,11 +1751,15 @@ export const elegantStarCollections = [
     description:
       "Luxurious Velvet Fabric Marriage Certificate Folder is an Elegant Star certificate folder direction created for formal presentation, keepsake storage and personalised finishing.",
     coverImage:
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder/Cover.JPG",
+    cover1:
+      "/media/collections/certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder/Cover.JPG",
     gallery: [
-      "/media/collections/special-one/bonded-in-grace-rose-gold-silver-glitter/cover1.jpg",
+      "/media/collections/certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder/Cover.JPG",
     ],
-    images: [],
+    images: [
+      "/media/collections/certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder/Cover.JPG",
+    ],
     videos: [
       "/media/collections/certificate-folders/luxurious-velvet-fabric-marriage-certificate-folder/luxurious-velvet-fabric-marriage-certificate-folder-video-01.mp4",
     ],
