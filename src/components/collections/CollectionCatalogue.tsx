@@ -3,6 +3,7 @@
 import {
   useCallback,
   useDeferredValue,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -21,6 +22,9 @@ import {
 import { DesignCard } from "@/components/designs/DesignCard";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { cn } from "@/lib/utils";
+
+const MOBILE_INITIAL_COLLECTION_COUNT = 16;
+const MOBILE_LOAD_MORE_COUNT = 16;
 
 function normalizeFilter(value: string | null): CollectionFilter {
   if (
@@ -49,6 +53,11 @@ export function CollectionCatalogue({
   const filter = normalizeFilter(searchParams.get("filter"));
 
   const [query, setQuery] = useState("");
+  const [isMobileViewport, setIsMobileViewport] = useState(true);
+  const [mobileVisibleState, setMobileVisibleState] = useState({
+    count: MOBILE_INITIAL_COLLECTION_COUNT,
+    key: "",
+  });
 
   /*
    * Deferring the search value prevents the collection grid from updating
@@ -114,6 +123,30 @@ export function CollectionCatalogue({
     });
   }, [filter, normalizedQuery]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateViewport = () => {
+      setIsMobileViewport(mediaQuery.matches);
+    };
+
+    updateViewport();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateViewport);
+
+      return () => {
+        mediaQuery.removeEventListener("change", updateViewport);
+      };
+    }
+
+    mediaQuery.addListener(updateViewport);
+
+    return () => {
+      mediaQuery.removeListener(updateViewport);
+    };
+  }, []);
+
   const hasActiveSearch = normalizedQuery.length > 0;
   const hasActiveFilter = filter !== "All";
   const showFilteredCount =
@@ -124,11 +157,43 @@ export function CollectionCatalogue({
   );
 
   const gridKey = `${filter}-${normalizedQuery || "all"}`;
+  const mobileVisibleKey = gridKey;
+  const visibleMobileCount =
+    mobileVisibleState.key === mobileVisibleKey
+      ? mobileVisibleState.count
+      : MOBILE_INITIAL_COLLECTION_COUNT;
+
+  const visibleCollections = isMobileViewport
+    ? filteredCollections.slice(0, visibleMobileCount)
+    : filteredCollections;
+
+  const hiddenCollectionCount =
+    filteredCollections.length - visibleCollections.length;
+
+  const canLoadMore =
+    isMobileViewport && hiddenCollectionCount > 0;
 
   const resetResults = useCallback(() => {
     setQuery("");
     updateFilter("All");
   }, [updateFilter]);
+
+  const showMoreCollections = useCallback(() => {
+    setMobileVisibleState((current) => {
+      const currentCount =
+        current.key === mobileVisibleKey
+          ? current.count
+          : MOBILE_INITIAL_COLLECTION_COUNT;
+
+      return {
+        key: mobileVisibleKey,
+        count: Math.min(
+          currentCount + MOBILE_LOAD_MORE_COUNT,
+          filteredCollections.length,
+        ),
+      };
+    });
+  }, [filteredCollections.length, mobileVisibleKey]);
 
   return (
     <div className="min-w-0">
@@ -323,12 +388,13 @@ export function CollectionCatalogue({
           stagger={0.04}
           start="top 88%"
         >
-          {filteredCollections.map(
+          {visibleCollections.map(
             (design, index) => (
               <DesignCard
                 key={design.slug}
                 design={design}
                 compact
+                enableHoverImage={!isMobileViewport}
                 priority={index < 4}
               />
             ),
@@ -375,6 +441,31 @@ export function CollectionCatalogue({
           </button>
         </RevealGroup>
       )}
+
+      {canLoadMore ? (
+        <div className="mt-9 flex justify-center">
+          <button
+            type="button"
+            onClick={showMoreCollections}
+            aria-label={`Load more collections, ${hiddenCollectionCount} remaining`}
+            className={cn(
+              "inline-flex min-h-11",
+              "touch-manipulation",
+              "items-center justify-center",
+              "rounded-full",
+              "bg-brand-olive px-5",
+              "text-sm font-bold text-brand-white",
+              "shadow-soft transition",
+              "hover:bg-[#3f4236]",
+              "focus-visible:outline-none",
+              "focus-visible:ring-2",
+              "focus-visible:ring-brand-sage",
+            )}
+          >
+            Load more
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

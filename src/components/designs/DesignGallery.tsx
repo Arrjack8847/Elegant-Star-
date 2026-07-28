@@ -100,8 +100,14 @@ export function DesignGallery({
     index: 0,
   });
 
-  const [soundEnabled, setSoundEnabled] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
+  const [soundState, setSoundState] = useState({
+    enabled: false,
+    key: "",
+  });
+  const [videoFailedState, setVideoFailedState] = useState({
+    failed: false,
+    key: "",
+  });
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -112,6 +118,13 @@ export function DesignGallery({
 
   const activeIndex = Math.min(active, media.length - 1);
   const activeMedia = media[activeIndex];
+  const activeMediaKey = `${activeMedia.type}:${activeMedia.src}`;
+  const soundEnabled =
+    soundState.key === activeMediaKey ? soundState.enabled : false;
+  const videoFailed =
+    videoFailedState.key === activeMediaKey
+      ? videoFailedState.failed
+      : false;
   const visibleThumbnails = media;
 
   const showThumbnails =
@@ -123,9 +136,6 @@ export function DesignGallery({
    * Sound can then be enabled after the user taps the button.
    */
   useEffect(() => {
-    setSoundEnabled(false);
-    setVideoFailed(false);
-
     if (activeMedia.type !== "video") {
       return;
     }
@@ -179,18 +189,21 @@ export function DesignGallery({
 
       await video.play();
 
-      setSoundEnabled(true);
+      setSoundState({
+        enabled: true,
+        key: activeMediaKey,
+      });
     } catch {
       video.muted = true;
-      setSoundEnabled(false);
+      setSoundState({
+        enabled: false,
+        key: activeMediaKey,
+      });
     }
   };
 
   const selectMedia = (index: number) => {
     videoRef.current?.pause();
-
-    setSoundEnabled(false);
-    setVideoFailed(false);
 
     setActiveMediaState({
       slug: design.slug,
@@ -233,8 +246,18 @@ export function DesignGallery({
                   playsInline
                   preload="metadata"
                   poster={activeMedia.poster}
-                  onLoadedData={() => setVideoFailed(false)}
-                  onError={() => setVideoFailed(true)}
+                  onLoadedData={() =>
+                    setVideoFailedState({
+                      failed: false,
+                      key: activeMediaKey,
+                    })
+                  }
+                  onError={() =>
+                    setVideoFailedState({
+                      failed: true,
+                      key: activeMediaKey,
+                    })
+                  }
                 />
 
                 {!soundEnabled ? (

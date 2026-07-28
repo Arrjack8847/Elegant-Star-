@@ -6,12 +6,17 @@ import type { InvitationCollection } from "@/data/collections";
 export function DesignCard({
   design,
   compact = false,
+  enableHoverImage = true,
   priority = false,
 }: {
   design: InvitationCollection;
   compact?: boolean;
+  enableHoverImage?: boolean;
   priority?: boolean;
 }) {
+  const shouldRenderHoverImage =
+    enableHoverImage && design.hoverImage !== design.cardImage;
+
   return (
     <article className="group motion-card-lift rounded-[20px]">
       <Link
@@ -24,16 +29,20 @@ export function DesignCard({
             alt={`${design.name} stationery collection`}
             fill
             priority={priority}
-            className="object-cover transition duration-700 motion-reduce:transition-none group-hover:scale-[1.025] group-hover:opacity-0"
+            className={`object-cover transition duration-700 motion-reduce:transition-none group-hover:scale-[1.025] ${
+              shouldRenderHoverImage ? "group-hover:opacity-0" : ""
+            }`}
             sizes="(max-width: 519px) 100vw, (max-width: 767px) 50vw, (max-width: 1119px) 33vw, 25vw"
           />
-          <Image
-            src={design.hoverImage}
-            alt=""
-            fill
-            className="object-cover opacity-0 transition duration-700 motion-reduce:transition-none group-hover:scale-[1.025] group-hover:opacity-100"
-            sizes="(max-width: 519px) 100vw, (max-width: 767px) 50vw, (max-width: 1119px) 33vw, 25vw"
-          />
+          {shouldRenderHoverImage ? (
+            <Image
+              src={design.hoverImage}
+              alt=""
+              fill
+              className="object-cover opacity-0 transition duration-700 motion-reduce:transition-none group-hover:scale-[1.025] group-hover:opacity-100"
+              sizes="(max-width: 519px) 100vw, (max-width: 767px) 50vw, (max-width: 1119px) 33vw, 25vw"
+            />
+          ) : null}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-olive/32 to-transparent opacity-80 transition duration-500 motion-reduce:transition-none group-hover:opacity-55" />
           <div className="absolute left-3 top-3 rounded-full bg-brand-ivory/82 px-3 py-1 text-[10px] font-bold tracking-[.14em] text-brand-olive backdrop-blur">
             {design.reference}

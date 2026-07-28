@@ -14,6 +14,7 @@ import { RelatedDesigns } from "@/components/designs/RelatedDesigns";
 import { RequestOrderButton } from "@/components/enquiry/RequestOrderButton";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { designToOrderContext } from "@/lib/enquiry";
+import { cn } from "@/lib/utils";
 
 export function generateStaticParams() {
   return invitationCollections.map((design) => ({
@@ -32,27 +33,53 @@ export async function generateMetadata({
   if (!design) {
     return {
       title: "Collection Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   const metadataImages = [
     design.cover1,
     design.cover2,
+    design.coverImage,
     ...design.images,
   ].filter(
     (image, index, list): image is string =>
       Boolean(image) && list.indexOf(image) === index,
   );
 
+  const pageTitle = `${design.name} ${design.reference}`;
+  const pageUrl = `/designs/${design.slug}`;
+
   return {
-    title: `${design.name} ${design.reference}`,
+    title: pageTitle,
     description: design.shortDescription,
+
+    alternates: {
+      canonical: pageUrl,
+    },
+
     openGraph: {
-      title: `${design.name} ${design.reference}`,
+      type: "website",
+      title: pageTitle,
       description: design.shortDescription,
+      url: pageUrl,
       ...(metadataImages.length > 0
         ? {
             images: metadataImages,
+          }
+        : {}),
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: design.shortDescription,
+      ...(metadataImages[0]
+        ? {
+            images: [metadataImages[0]],
           }
         : {}),
     },
@@ -71,35 +98,46 @@ export default async function DesignPage({
     notFound();
   }
 
-  const related = getRelatedCollections(
+  const relatedCollections = getRelatedCollections(
     design.slug,
     design.categories,
   );
 
+  const orderContext = designToOrderContext(design);
+
   return (
-    <>
-      {/* Product introduction */}
+    <div
+      className={cn(
+        "min-w-0 overflow-x-clip",
+        "pb-[calc(6.5rem+env(safe-area-inset-bottom))]",
+        "md:pb-0",
+      )}
+    >
+      {/* Collection introduction */}
       <section
-        className="section-shell design-detail-hero"
+        className="section-shell design-detail-hero min-w-0"
         data-nav-theme="light"
+        aria-labelledby="collection-title"
       >
-        <div className="section-inner">
-          {/* Back navigation */}
+        <div className="section-inner min-w-0">
           <Link
             href="/collections"
             scroll
-            className="
-              mb-5 inline-flex min-h-11 items-center gap-2
-              rounded-full text-sm font-bold text-brand-olive/60
-              transition-colors duration-200
-              hover:text-brand-olive
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-brand-sage
-              focus-visible:ring-offset-4
-              focus-visible:ring-offset-brand-ivory
-              sm:mb-7
-            "
+            aria-label="Return to all collections"
+            className={cn(
+              "mb-5 inline-flex min-h-11",
+              "touch-manipulation items-center gap-2",
+              "rounded-full",
+              "text-sm font-bold text-brand-olive/60",
+              "transition-colors duration-200",
+              "hover:text-brand-olive",
+              "focus-visible:outline-none",
+              "focus-visible:ring-2",
+              "focus-visible:ring-brand-sage",
+              "focus-visible:ring-offset-4",
+              "focus-visible:ring-offset-brand-ivory",
+              "sm:mb-7",
+            )}
           >
             <ArrowLeft
               size={18}
@@ -111,81 +149,84 @@ export default async function DesignPage({
           </Link>
 
           <div
-            className="
-              grid gap-8
-              lg:grid-cols-[1.05fr_.95fr]
-              lg:items-start
-              lg:gap-12
-              xl:gap-16
-            "
+            className={cn(
+              "grid min-w-0 gap-8",
+              "lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]",
+              "lg:items-start",
+              "lg:gap-12",
+              "xl:gap-16",
+            )}
           >
-            <DesignGallery design={design} />
+            <div className="min-w-0">
+              <DesignGallery design={design} />
+            </div>
 
             <RevealGroup
-              className="
-                min-w-0
-                lg:sticky
-                lg:top-[var(--nav-offset-desktop)]
-              "
-              start="top 84%"
+              className={cn(
+                "min-w-0",
+                "lg:sticky",
+                "lg:top-[var(--nav-offset-desktop)]",
+              )}
+              start="top 86%"
             >
               <p className="small-label text-brand-sage">
                 {design.reference}
               </p>
 
               <h1
-                className="
-                  display-heading mt-4
-                  break-words
-                  text-[clamp(2.75rem,12vw,4.5rem)]
-                  leading-[0.94]
-                  sm:text-6xl
-                  md:text-7xl
-                  lg:text-[4.75rem]
-                  xl:text-[5.25rem]
-                "
+                id="collection-title"
+                className={cn(
+                  "display-heading mt-4",
+                  "min-w-0 break-words",
+                  "text-[clamp(2.65rem,12vw,4.5rem)]",
+                  "leading-[0.94]",
+                  "sm:text-6xl",
+                  "md:text-7xl",
+                  "lg:text-[4.5rem]",
+                  "xl:text-[5rem]",
+                )}
               >
                 {design.name}
               </h1>
 
               <p
-                className="
-                  mt-4 break-words
-                  text-sm font-bold leading-6
-                  text-brand-olive/58
-                "
+                className={cn(
+                  "mt-4 break-words",
+                  "text-sm font-bold leading-6",
+                  "text-brand-olive/58",
+                )}
               >
                 {design.categories.join(" / ")}
               </p>
 
               <p
-                className="
-                  body-copy mt-5
-                  text-base leading-8
-                  sm:mt-6 sm:text-lg
-                "
+                className={cn(
+                  "body-copy mt-5",
+                  "max-w-2xl",
+                  "text-base leading-8",
+                  "sm:mt-6 sm:text-lg",
+                )}
               >
                 {design.fullDescription}
               </p>
 
-              <div className="mt-7 sm:mt-8">
-                <RequestOrderButton
-                  context={designToOrderContext(design)}
-                >
+              {/* Desktop and tablet order button */}
+              <div className="mt-7 hidden sm:mt-8 md:block">
+                <RequestOrderButton context={orderContext}>
                   Request Order
                 </RequestOrderButton>
               </div>
 
               <p
-                className="
-                  mt-4 max-w-xl
-                  text-xs leading-5
-                  text-brand-olive/46
-                "
+                className={cn(
+                  "mt-5 max-w-xl",
+                  "text-xs leading-5",
+                  "text-brand-olive/46",
+                  "md:mt-4",
+                )}
               >
-                Photographs show available reference views.
-                Confirm exact materials, finish availability
-                and timing during enquiry.
+                Photographs show available reference views. Confirm exact
+                materials, finish availability and timing during enquiry.
               </p>
             </RevealGroup>
           </div>
@@ -194,43 +235,49 @@ export default async function DesignPage({
 
       {/* Collection details */}
       <section
-        className="section-shell bg-brand-white/40"
+        className="section-shell min-w-0 bg-brand-white/40"
         data-nav-theme="light"
+        aria-labelledby="collection-details-heading"
       >
         <div
-          className="
-            section-inner grid gap-8
-            lg:grid-cols-[.8fr_1.2fr]
-            lg:gap-12
-          "
+          className={cn(
+            "section-inner grid min-w-0 gap-8",
+            "lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]",
+            "lg:gap-12",
+          )}
         >
-          <RevealGroup start="top 84%">
+          <RevealGroup
+            className="min-w-0"
+            start="top 86%"
+          >
             <p className="small-label text-brand-sage">
               Collection details
             </p>
 
             <h2
-              className="
-                display-heading mt-4
-                text-[2.8rem] leading-[0.96]
-                sm:text-5xl
-                md:text-7xl
-              "
+              id="collection-details-heading"
+              className={cn(
+                "display-heading mt-4",
+                "max-w-[12ch] break-words",
+                "text-[2.7rem] leading-[0.96]",
+                "sm:text-5xl",
+                "md:text-7xl",
+              )}
             >
               A direction ready to personalise.
             </h2>
           </RevealGroup>
 
           <RevealGroup
-            className="grid gap-5 md:grid-cols-2"
-            stagger={0.06}
-            start="top 82%"
+            className="grid min-w-0 gap-5 md:grid-cols-2"
+            stagger={0.05}
+            start="top 86%"
           >
             <Detail
               title="Format & composition"
               items={[
-                "Photographed views in the gallery",
-                "Format confirmed during consultation",
+                "Photographed views shown in the gallery",
+                "Final format confirmed during consultation",
               ]}
             />
 
@@ -253,24 +300,35 @@ export default async function DesignPage({
         </div>
       </section>
 
-      <RelatedDesigns designs={related} />
+      {relatedCollections.length > 0 ? (
+        <RelatedDesigns designs={relatedCollections} />
+      ) : null}
 
-      {/* Mobile enquiry button */}
+      {/* Mobile order button */}
       <div
-        className="
-          mobile-safe-bottom fixed
-          bottom-0 left-3 right-3
-          z-40 md:hidden
-        "
+        className={cn(
+          "fixed left-3 right-3 z-40",
+          "bottom-[calc(0.75rem+env(safe-area-inset-bottom))]",
+          "md:hidden",
+        )}
       >
-        <RequestOrderButton
-          context={designToOrderContext(design)}
-          className="w-full"
+        <div
+          className={cn(
+            "rounded-full",
+            "bg-brand-ivory/88 p-1",
+            "shadow-[0_16px_48px_rgba(48,50,41,0.24)]",
+            "backdrop-blur-md",
+          )}
         >
-          Request Order
-        </RequestOrderButton>
+          <RequestOrderButton
+            context={orderContext}
+            className="w-full touch-manipulation"
+          >
+            Request Order
+          </RequestOrderButton>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -280,49 +338,59 @@ function Detail({
   wide = false,
 }: {
   title: string;
-  items: string[];
+  items: readonly string[];
   wide?: boolean;
 }) {
+  const visibleItems = items
+    .map((item) => item.trim())
+    .filter(
+      (item, index, list) =>
+        Boolean(item) && list.indexOf(item) === index,
+    );
+
+  if (visibleItems.length === 0) {
+    return null;
+  }
+
   return (
     <article
-      className={`
-        rounded-[20px]
-        border border-brand-olive/10
-        bg-brand-white/68
-        p-5 sm:p-6
-        ${wide ? "md:col-span-2" : ""}
-      `}
+      className={cn(
+        "min-w-0 rounded-[20px]",
+        "border border-brand-olive/10",
+        "bg-brand-white/68",
+        "p-5 sm:p-6",
+        wide && "md:col-span-2",
+      )}
     >
       <h3
-        className="
-          break-words
-          font-display
-          text-[1.8rem]
-          leading-[1.05]
-          sm:text-3xl
-        "
+        className={cn(
+          "min-w-0 break-words",
+          "font-display",
+          "text-[1.8rem] leading-[1.05]",
+          "sm:text-3xl",
+        )}
       >
         {title}
       </h3>
 
       <ul
-        className="
-          mt-4 grid gap-2
-          text-sm leading-6
-          text-brand-olive/68
-        "
+        className={cn(
+          "mt-4 grid gap-2",
+          "text-sm leading-6",
+          "text-brand-olive/68",
+        )}
       >
-        {items.map((item) => (
+        {visibleItems.map((item, index) => (
           <li
-            key={item}
-            className="flex gap-2"
+            key={`${item}-${index}`}
+            className="flex min-w-0 gap-2"
           >
             <span
-              className="
-                mt-2 size-1.5 shrink-0
-                rounded-full bg-brand-sage
-              "
               aria-hidden="true"
+              className={cn(
+                "mt-2 size-1.5 shrink-0",
+                "rounded-full bg-brand-sage",
+              )}
             />
 
             <span className="min-w-0 break-words">
