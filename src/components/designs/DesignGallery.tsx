@@ -110,7 +110,10 @@ export function DesignGallery({ design }: { design: InvitationCollection }) {
     video.muted = false;
     video.volume = 1;
     video.play().catch(() => {
-      // Browsers can block autoplay with sound; controls remain available.
+      video.muted = true;
+      video.play().catch(() => {
+        // Browsers can still block autoplay; controls remain available.
+      });
     });
   }, [activeMedia.src, activeMedia.type]);
 
