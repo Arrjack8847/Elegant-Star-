@@ -106,16 +106,32 @@ export default async function DesignPage({
   const orderContext = designToOrderContext(design);
 
   return (
-    <div
+    <main
       className={cn(
         "min-w-0 overflow-x-clip",
-        "pb-[calc(6.5rem+env(safe-area-inset-bottom))]",
+        /*
+         * Leaves enough space for the floating mobile order button so it
+         * does not cover the final content.
+         */
+        "pb-[calc(9.5rem+env(safe-area-inset-bottom))]",
         "md:pb-0",
       )}
     >
       {/* Collection introduction */}
       <section
-        className="section-shell design-detail-hero min-w-0"
+        className={cn(
+          "relative min-w-0",
+          /*
+           * Do not rely on section-shell for this page's top offset.
+           * The extra padding keeps the back link below the fixed navbar.
+           */
+          "pb-16",
+          "pt-[calc(8.75rem+env(safe-area-inset-top))]",
+          "sm:pb-20",
+          "sm:pt-[calc(9.25rem+env(safe-area-inset-top))]",
+          "lg:pb-24",
+          "lg:pt-[calc(9.5rem+env(safe-area-inset-top))]",
+        )}
         data-nav-theme="light"
         aria-labelledby="collection-title"
       >
@@ -125,10 +141,10 @@ export default async function DesignPage({
             scroll
             aria-label="Return to all collections"
             className={cn(
-              "mb-5 inline-flex min-h-11",
+              "mb-6 inline-flex min-h-11",
               "touch-manipulation items-center gap-2",
               "rounded-full",
-              "text-sm font-bold text-brand-olive/60",
+              "text-sm font-bold text-brand-olive/65",
               "transition-colors duration-200",
               "hover:text-brand-olive",
               "focus-visible:outline-none",
@@ -136,7 +152,7 @@ export default async function DesignPage({
               "focus-visible:ring-brand-sage",
               "focus-visible:ring-offset-4",
               "focus-visible:ring-offset-brand-ivory",
-              "sm:mb-7",
+              "sm:mb-8",
             )}
           >
             <ArrowLeft
@@ -167,7 +183,7 @@ export default async function DesignPage({
                 "lg:sticky",
                 "lg:top-[var(--nav-offset-desktop)]",
               )}
-              start="top 86%"
+              start="top 88%"
             >
               <p className="small-label text-brand-sage">
                 {design.reference}
@@ -210,8 +226,8 @@ export default async function DesignPage({
                 {design.fullDescription}
               </p>
 
-              {/* Desktop and tablet order button */}
-              <div className="mt-7 hidden sm:mt-8 md:block">
+              {/* Tablet and desktop order button */}
+              <div className="mt-7 hidden md:block">
                 <RequestOrderButton context={orderContext}>
                   Request Order
                 </RequestOrderButton>
@@ -235,7 +251,13 @@ export default async function DesignPage({
 
       {/* Collection details */}
       <section
-        className="section-shell min-w-0 bg-brand-white/40"
+        className={cn(
+          "relative min-w-0",
+          "bg-brand-white/40",
+          "py-16",
+          "sm:py-20",
+          "lg:py-24",
+        )}
         data-nav-theme="light"
         aria-labelledby="collection-details-heading"
       >
@@ -248,7 +270,7 @@ export default async function DesignPage({
         >
           <RevealGroup
             className="min-w-0"
-            start="top 86%"
+            start="top 88%"
           >
             <p className="small-label text-brand-sage">
               Collection details
@@ -271,7 +293,7 @@ export default async function DesignPage({
           <RevealGroup
             className="grid min-w-0 gap-5 md:grid-cols-2"
             stagger={0.05}
-            start="top 86%"
+            start="top 88%"
           >
             <Detail
               title="Format & composition"
@@ -307,28 +329,38 @@ export default async function DesignPage({
       {/* Mobile order button */}
       <div
         className={cn(
-          "fixed left-3 right-3 z-40",
-          "bottom-[calc(0.75rem+env(safe-area-inset-bottom))]",
+          "pointer-events-none fixed",
+          "left-4 right-4 z-40",
+          /*
+           * Keeps the button above iPhone Safari's bottom browser controls.
+           */
+          "bottom-[calc(5.75rem+env(safe-area-inset-bottom))]",
           "md:hidden",
         )}
       >
         <div
           className={cn(
+            "pointer-events-auto",
+            "mx-auto w-full max-w-xl",
             "rounded-full",
-            "bg-brand-ivory/88 p-1",
-            "shadow-[0_16px_48px_rgba(48,50,41,0.24)]",
-            "backdrop-blur-md",
+            "border border-brand-white/55",
+            "bg-brand-ivory/92 p-1.5",
+            "shadow-[0_18px_52px_rgba(48,50,41,0.28)]",
+            "backdrop-blur-xl",
           )}
         >
           <RequestOrderButton
             context={orderContext}
-            className="w-full touch-manipulation"
+            className={cn(
+              "min-h-14 w-full",
+              "touch-manipulation",
+            )}
           >
             Request Order
           </RequestOrderButton>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
