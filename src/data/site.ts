@@ -13,12 +13,6 @@ const publicConfig = {
     process.env.NEXT_PUBLIC_SITE_URL,
     "https://elegant-star-3gk1.vercel.app",
   ),
-  messengerUrl: envValue(
-    process.env.NEXT_PUBLIC_CONTACT_MESSENGER_URL,
-  ),
-  messengerUsername: envValue(
-    process.env.NEXT_PUBLIC_CONTACT_MESSENGER_USERNAME,
-  ),
   viberUrl: envValue(
     process.env.NEXT_PUBLIC_CONTACT_VIBER_URL,
   ),
@@ -76,26 +70,17 @@ const facebook = {
   href: "https://www.facebook.com/share/1CswnjjZyQ/?mibextid=wwXIfr",
 } as const;
 
-/*
- * Add NEXT_PUBLIC_CONTACT_MESSENGER_USERNAME when the official Facebook
- * username is known. The numeric Page ID remains as a fallback.
- *
- * A complete Messenger URL can also be supplied through:
- * NEXT_PUBLIC_CONTACT_MESSENGER_URL
- */
 const messengerPageId = "61564479194348";
-
-const messengerTarget =
-  publicConfig.messengerUsername || messengerPageId;
+const messengerUrl = `https://m.me/${messengerPageId}`;
+const messengerFacebookFallbackUrl =
+  `https://www.facebook.com/${messengerPageId}/`;
 
 const messenger = {
   label: "Messenger",
   value: "Elegant Star Messenger",
   pageId: messengerPageId,
-  username: publicConfig.messengerUsername,
-  href:
-    publicConfig.messengerUrl ||
-    `https://m.me/${messengerTarget}`,
+  href: messengerUrl,
+  facebookFallbackHref: messengerFacebookFallbackUrl,
 } as const;
 
 /*
@@ -274,8 +259,8 @@ export const contactDetails = {
   mapsEmbedUrl: maps.embedUrl,
 
   messengerPageId: messenger.pageId,
-  messengerUsername: messenger.username,
   messengerUrl: messenger.href,
+  messengerFacebookFallbackUrl: messenger.facebookFallbackHref,
 
   viberDisplayNumber: viber.displayNumber,
   viberNumber: viber.number,

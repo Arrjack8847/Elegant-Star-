@@ -27,6 +27,7 @@ import {
   useIsomorphicLayoutEffect,
 } from "@/components/motion/gsapScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
 
 type EnquiryState = {
   isOpen: boolean;
@@ -279,19 +280,19 @@ function EnquirySheet({
       label: "Open Messenger",
       href: contactDetails.messengerUrl,
       icon: MessageCircle,
-      external: true,
+      external: false,
     },
     {
       label: "Open Viber",
       href: contactDetails.viberUrl,
       icon: MessageCircle,
-      external: true,
+      external: false,
     },
     {
       label: "Open WhatsApp",
       href: contactDetails.whatsappUrl,
       icon: MessageCircle,
-      external: true,
+      external: false,
     },
   ].filter((action) => action.href);
 
@@ -370,6 +371,11 @@ function EnquirySheet({
                 href={action.href}
                 target={action.external ? "_blank" : undefined}
                 rel={action.external ? "noopener noreferrer" : undefined}
+                aria-label={
+                  action.label === "Open Messenger"
+                    ? "Message Elegant Star on Messenger"
+                    : undefined
+                }
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-brand-olive/15 bg-brand-white/72 px-4 py-3 text-center text-sm font-bold leading-snug text-brand-olive transition hover:-translate-y-0.5 hover:bg-brand-white sm:px-5"
               >
                 <Icon size={17} aria-hidden="true" />
@@ -381,6 +387,8 @@ function EnquirySheet({
             );
           })}
         </div>
+
+        <MessengerFallbackLinks className="mt-3" />
       </div>
     </div>
   );

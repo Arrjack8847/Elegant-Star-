@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { EnquiryButton } from "@/components/enquiry/EnquiryButton";
+import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import {
   FacebookIcon,
@@ -312,6 +313,10 @@ export default function ContactPage() {
 
                     <ArrowUpRight size={15} aria-hidden="true" />
                   </a>
+
+                  {channel.kind === "messenger" ? (
+                    <MessengerFallbackLinks className="mt-3" />
+                  ) : null}
 
                   <span
                     aria-hidden="true"

@@ -27,7 +27,6 @@
 
 ## Still owner-editable
 
-- Messenger URL
 - Viber URL
 - Phone number
 - Address and map URL

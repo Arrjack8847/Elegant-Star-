@@ -9,15 +9,15 @@ import {
 } from "react";
 import { X } from "lucide-react";
 import {
-  buildMessengerUrl,
   buildViberShareUrl,
-  openMessengerUrl,
   openViberShareUrl,
 } from "@/lib/buildChatLinks";
 import { buildOrderMessage, type OrderContext } from "@/lib/buildOrderMessage";
 import { buildProductUrl } from "@/lib/buildProductUrl";
+import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
 import { ChatChannelButton } from "@/components/enquiry/ChatChannelButton";
 import { RequestOrderSummary } from "@/components/enquiry/RequestOrderSummary";
+import { contactDetails } from "@/data/site";
 
 function normalizeContext(context: OrderContext | undefined): OrderContext {
   const slug = context?.slug?.trim() || "elegant-star-design";
@@ -44,11 +44,6 @@ export function RequestOrderDialog({
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const orderContext = normalizeContext(context);
-
-  const handleMessenger = useCallback(() => {
-    openMessengerUrl(buildMessengerUrl(orderContext.slug));
-    onClose();
-  }, [onClose, orderContext.slug]);
 
   const handleViber = useCallback(() => {
     const productUrl = buildProductUrl(
@@ -172,7 +167,7 @@ export function RequestOrderDialog({
           <ChatChannelButton
             channel="messenger"
             ariaLabel={`Open Messenger to enquire about ${orderContext.title}`}
-            onClick={handleMessenger}
+            href={contactDetails.messengerUrl}
           />
           <ChatChannelButton
             channel="viber"
@@ -180,6 +175,8 @@ export function RequestOrderDialog({
             onClick={handleViber}
           />
         </div>
+
+        <MessengerFallbackLinks className="mt-3" />
       </div>
     </div>
   );

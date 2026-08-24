@@ -4,8 +4,10 @@ import { ExternalLink, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { SectionTransition } from "@/components/motion/SectionTransition";
+import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
 import { FacebookIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 import { siteMedia } from "@/data/siteMedia";
+import { contactDetails } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 const instagramUrl = "https://www.instagram.com/elegant_star_invitations_/";
@@ -169,10 +171,8 @@ export function SocialMediaShowcase() {
           </ul>
 
           <a
-            href="https://m.me/61564479194348"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Message Elegant Star on Messenger (opens in a new tab)"
+            href={contactDetails.messengerUrl}
+            aria-label="Message Elegant Star on Messenger"
             className={cn(
               "group mt-3 inline-flex min-h-12 w-full items-center justify-center gap-2.5",
               "rounded-full border border-brand-champagne/50 bg-brand-champagne/12 px-5",
@@ -194,11 +194,11 @@ export function SocialMediaShowcase() {
             />
           </a>
 
+          <MessengerFallbackLinks variant="dark" className="mt-2" />
+
           <a
-            href="https://viber.me/959678884898"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with Elegant Star on Viber (opens in a new tab)"
+            href={contactDetails.viberUrl}
+            aria-label="Chat with Elegant Star on Viber"
             className={cn(
               "group mt-3 inline-flex min-h-11 items-center gap-2",
               "text-sm font-bold text-brand-ivory/82 underline decoration-brand-ivory/35",

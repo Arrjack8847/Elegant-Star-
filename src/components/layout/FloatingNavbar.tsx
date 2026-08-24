@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 
 import { EnquiryButton } from "@/components/enquiry/EnquiryButton";
+import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
 import { contactDetails, navigation, siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -91,7 +92,7 @@ function getContactLinks(): ContactLink[] {
           label: "Messenger",
           href: contactDetails.messengerUrl,
           icon: MessageCircle,
-          external: true,
+          external: false,
         }
       : null,
 
@@ -100,7 +101,7 @@ function getContactLinks(): ContactLink[] {
           label: "Viber",
           href: contactDetails.viberUrl,
           icon: MessageCircle,
-          external: true,
+          external: false,
         }
       : null,
 
@@ -514,10 +515,12 @@ export function FloatingNavbar() {
                   <MobileContact
                     key={item.label}
                     {...item}
-                    onSelect={() => closeMenu({ restoreFocus: true })}
+                    onSelect={() => closeMenu()}
                   />
                 ))}
               </div>
+
+              <MessengerFallbackLinks className="mt-2 px-1" />
             </div>
 
             {contactDetails.address ? (
@@ -547,7 +550,7 @@ function MobileContact({
       onClick={onSelect}
       target={opensNewTab ? "_blank" : undefined}
       rel={opensNewTab ? "noopener noreferrer" : undefined}
-      className="inline-flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-2xl border border-brand-olive/12 bg-brand-white/65 px-3 text-xs font-bold text-brand-olive transition hover:border-brand-olive/25 hover:bg-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage"
+      className="inline-flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-2xl border border-brand-olive/12 bg-brand-white/65 px-3 text-xs font-bold text-brand-olive transition hover:border-brand-olive/25 hover:bg-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage"
     >
       <Icon size={15} aria-hidden="true" className="shrink-0" />
 
