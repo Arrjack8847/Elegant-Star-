@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EnvelopeHero } from "@/components/home/EnvelopeHero";
 import { SeamlessBrandIntroduction } from "@/components/home/SeamlessBrandIntroduction";
 import { InteractiveFeaturedCollections } from "@/components/home/InteractiveFeaturedCollections";
@@ -7,6 +8,22 @@ import { InteractiveCraftsmanship } from "@/components/home/InteractiveCraftsman
 import { SimpleOrderingProcess } from "@/components/home/SimpleOrderingProcess";
 import { ClientTestimonial } from "@/components/home/ClientTestimonial";
 import { GuidedEnquiryExperience } from "@/components/home/GuidedEnquiryExperience";
+
+export const metadata: Metadata = {
+  title: "Wedding Invitations & Stationery in Yangon",
+  description:
+    "Elegant Star creates wedding invitations, marriage certificate folders and coordinated stationery for celebrations in Yangon, Myanmar.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Wedding Invitations & Stationery in Yangon | Elegant Star",
+    description:
+      "Explore Elegant Star wedding invitations, marriage certificate folders and coordinated stationery in Yangon, Myanmar.",
+    url: "/",
+    type: "website",
+  },
+};
 
 export default function HomePage() {
   return (

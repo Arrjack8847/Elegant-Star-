@@ -50,12 +50,26 @@ export async function generateMetadata({
       Boolean(image) && list.indexOf(image) === index,
   );
 
-  const pageTitle = `${design.name} ${design.reference}`;
+  const categoryLabel = design.categories.join(" & ");
+  const categoryKeyword = categoryLabel.toLowerCase();
+  const pageTitle = `${design.name} | ${categoryLabel} Yangon`;
+  const socialTitle = `${design.name} | Elegant Star ${categoryLabel}`;
   const pageUrl = `/designs/${design.slug}`;
+  const seoDescription = `${design.shortDescription} Explore this customisable ${categoryKeyword} design from Elegant Star in Yangon, Myanmar.`;
 
   return {
     title: pageTitle,
-    description: design.shortDescription,
+    description: seoDescription,
+    keywords: [
+      design.name,
+      design.reference,
+      categoryLabel,
+      `${categoryLabel} Yangon`,
+      `${categoryLabel} Myanmar`,
+      "Elegant Star",
+      "wedding invitations Yangon",
+      "wedding stationery Myanmar",
+    ],
 
     alternates: {
       canonical: pageUrl,
@@ -63,20 +77,26 @@ export async function generateMetadata({
 
     openGraph: {
       type: "website",
-      title: pageTitle,
-      description: design.shortDescription,
+      title: socialTitle,
+      description: seoDescription,
       url: pageUrl,
       ...(metadataImages.length > 0
         ? {
-            images: metadataImages,
+            images: metadataImages.slice(0, 4).map((url, index) => ({
+              url,
+              alt:
+                index === 0
+                  ? `${design.name} ${categoryLabel} by Elegant Star`
+                  : `${design.name} design detail ${index + 1}`,
+            })),
           }
         : {}),
     },
 
     twitter: {
       card: "summary_large_image",
-      title: pageTitle,
-      description: design.shortDescription,
+      title: socialTitle,
+      description: seoDescription,
       ...(metadataImages[0]
         ? {
             images: [metadataImages[0]],
@@ -115,10 +135,10 @@ export default async function DesignPage({
     >
       {/* Collection introduction */}
       <section
-  className="section-shell design-detail-hero min-w-0 pt-[calc(7.5rem+env(safe-area-inset-top))]"
-  data-nav-theme="light"
-  aria-labelledby="collection-title"
->
+        className="section-shell design-detail-hero min-w-0 pt-[calc(7.5rem+env(safe-area-inset-top))]"
+        data-nav-theme="light"
+        aria-labelledby="collection-title"
+      >
         <div className="section-inner min-w-0">
           <Link
             href="/collections"
