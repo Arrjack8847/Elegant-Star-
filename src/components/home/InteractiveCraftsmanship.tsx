@@ -100,10 +100,13 @@ export function InteractiveCraftsmanship() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    activeTab.scrollIntoView({
+    const targetLeft =
+      activeTab.offsetLeft -
+      (tabList.clientWidth - activeTab.offsetWidth) / 2;
+
+    tabList.scrollTo({
+      left: Math.max(0, targetLeft),
       behavior: prefersReducedMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
     });
   }, [active]);
 
@@ -752,4 +755,3 @@ export function InteractiveCraftsmanship() {
     </SectionTransition>
   );
 }
-
