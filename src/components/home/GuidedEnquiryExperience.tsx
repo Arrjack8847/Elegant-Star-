@@ -333,7 +333,7 @@ export function GuidedEnquiryExperience() {
     <SectionTransition
       id="guided-enquiry"
       variant="rounded-dark"
-      className="section-shell scroll-mt-24 bg-brand-sage text-brand-white"
+      className="section-shell bg-brand-sage text-brand-white"
       data-nav-theme="dark"
     >
       <div className="section-inner">
@@ -685,7 +685,7 @@ function StyleStep({
   headingRef: Ref<HTMLHeadingElement>;
 }) {
   return (
-    <fieldset>
+    <fieldset className="min-w-0">
       <legend className="sr-only">{steps[2].title}</legend>
 
       <h3

@@ -194,7 +194,10 @@ function EnquirySheet({
         : null;
 
     document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -231,6 +234,7 @@ function EnquirySheet({
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
 
