@@ -10,9 +10,9 @@ import { companyCopy } from "@/data/site";
 import { siteMedia } from "@/data/siteMedia";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our Invitation Studio in Yangon",
   description:
-    "Learn about Elegant Star's invitation, certificate folder and coordinated stationery approach.",
+    "Learn about Elegant Star, a Yangon invitation and stationery studio creating wedding invitations, certificate folders and coordinated celebration pieces.",
 };
 
 const heroSlides = [
