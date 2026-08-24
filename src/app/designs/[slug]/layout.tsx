@@ -1,22 +1,7 @@
-import type { Metadata } from "next";
-import { getStoryBySlug } from "@/data/stories";
+import { getCollectionBySlug } from "@/data/collections";
 import { getConfiguredSiteUrl } from "@/lib/site-url";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-
-  return {
-    alternates: {
-      canonical: `/stories/${slug}`,
-    },
-  };
-}
-
-export default async function StoryLayout({
+export default async function DesignLayout({
   children,
   params,
 }: Readonly<{
@@ -24,11 +9,11 @@ export default async function StoryLayout({
   params: Promise<{ slug: string }>;
 }>) {
   const { slug } = await params;
-  const story = getStoryBySlug(slug);
+  const design = getCollectionBySlug(slug);
   const siteUrl = getConfiguredSiteUrl();
 
   const breadcrumbData =
-    story && siteUrl
+    design && siteUrl
       ? {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
@@ -42,14 +27,14 @@ export default async function StoryLayout({
             {
               "@type": "ListItem",
               position: 2,
-              name: "Stories",
-              item: `${siteUrl}/stories`,
+              name: "Collections",
+              item: `${siteUrl}/collections`,
             },
             {
               "@type": "ListItem",
               position: 3,
-              name: story.title,
-              item: `${siteUrl}/stories/${story.slug}`,
+              name: design.name,
+              item: `${siteUrl}/designs/${design.slug}`,
             },
           ],
         }
