@@ -4,9 +4,9 @@ import { StoryCard } from "@/components/stories/StoryCard";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 
 export const metadata: Metadata = {
-  title: "Real Celebration Stories",
+  title: "Wedding Stationery & Celebration Stories",
   description:
-    "Explore privacy-safe Elegant Star stories connecting stationery with real celebrations.",
+    "Explore Elegant Star wedding stationery and celebration stories from Yangon, showing how invitation suites and coordinated pieces become part of meaningful events.",
 };
 export default function StoriesPage() {
   return (
@@ -19,9 +19,9 @@ export default function StoriesPage() {
             <span className="block">to the day itself.</span>
           </h1>
           <p className="body-copy mt-5 text-base leading-8 sm:mt-6 sm:text-lg">
-            Five curated stories show how Elegant Star stationery becomes part
-            of a wider celebration. Public titles intentionally protect client
-            identities.
+            Five curated stories show how Elegant Star wedding stationery and
+            invitation pieces become part of celebrations in Yangon and beyond.
+            Public titles intentionally protect client identities.
           </p>
         </RevealGroup>
         <RevealGroup

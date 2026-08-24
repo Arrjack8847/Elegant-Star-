@@ -8,8 +8,8 @@ import { invitationCollections } from "@/data/collections";
 const collectionCount = invitationCollections.length;
 
 export const metadata: Metadata = {
-  title: "Stationery Collections",
-  description: `Explore ${collectionCount} Elegant Star stationery collections across invitations, certificate folders, keepsakes and official stationery.`,
+  title: "Wedding Invitation Collections in Yangon",
+  description: `Explore ${collectionCount} Elegant Star wedding invitation and stationery collections in Yangon, including certificate folders, keepsakes and coordinated celebration pieces.`,
 };
 
 function formatCollectionCount(count: number) {
@@ -106,7 +106,7 @@ export default function CollectionsPage() {
                     xl:text-[4.5rem]
                   "
                 >
-                  Stationery Collections
+                  Wedding Invitation &amp; Stationery Collections
                 </h1>
 
                 <div
@@ -115,8 +115,9 @@ export default function CollectionsPage() {
                 />
 
                 <p className="body-copy max-w-[34rem] text-base leading-7 md:leading-8">
-                  Explore invitations, certificate folders, keepsakes and
-                  official stationery crafted for meaningful occasions.
+                  Explore wedding invitations, certificate folders, keepsakes
+                  and coordinated stationery created for celebrations in Yangon
+                  and across Myanmar.
                 </p>
               </div>
             </header>
