@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     images: [siteConfig.openGraphImage],
   },
   icons: {
-    icon: siteConfig.logoPath,
-    shortcut: siteConfig.logoPath,
-    apple: siteConfig.logoPath,
+    icon: "/brand/brand/elegant-star-mark-white.png",
+    shortcut: "/brand/brand/elegant-star-mark-white.png",
+    apple: "/brand/brand/elegant-star-mark-white.png",
   },
 };
 
