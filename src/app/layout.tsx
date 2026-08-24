@@ -3,24 +3,56 @@ import "./globals.css";
 import { EnquiryProvider } from "@/components/enquiry/EnquiryProvider";
 import { FloatingNavbar } from "@/components/layout/FloatingNavbar";
 import { Footer } from "@/components/layout/Footer";
-import { siteConfig } from "@/data/site";
+import { contactDetails, siteConfig } from "@/data/site";
 import { getSiteUrl, hasConfiguredSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
 const isIndexable = hasConfiguredSiteUrl();
+const seoDescription = `${siteConfig.description} Based in Yangon, Myanmar.`;
+
+const structuredData = isIndexable
+  ? {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${siteUrl}/#organization`,
+          name: siteConfig.name,
+          alternateName: `${siteConfig.name} - ${siteConfig.descriptor}`,
+          url: siteUrl,
+          email: contactDetails.email.value,
+          telephone: contactDetails.primaryPhone.value,
+          sameAs: [
+            contactDetails.instagram.href,
+            contactDetails.facebook.href,
+          ],
+          areaServed: {
+            "@type": "City",
+            name: "Yangon",
+          },
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          url: siteUrl,
+          name: siteConfig.name,
+          description: seoDescription,
+          publisher: {
+            "@id": `${siteUrl}/#organization`,
+          },
+          inLanguage: "en",
+        },
+      ],
+    }
+  : null;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} | Invitations & Creation`,
+    default: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
-  alternates: isIndexable
-    ? {
-        canonical: "/",
-      }
-    : undefined,
+  description: seoDescription,
   robots: isIndexable
     ? undefined
     : {
@@ -28,10 +60,9 @@ export const metadata: Metadata = {
         follow: false,
       },
   openGraph: {
-    title: `${siteConfig.name} | Invitations & Creation`,
-    description: siteConfig.description,
+    title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
+    description: seoDescription,
     type: "website",
-    url: isIndexable ? siteUrl : undefined,
     images: [
       {
         url: siteConfig.openGraphImage,
@@ -41,8 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Invitations & Creation`,
-    description: siteConfig.description,
+    title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
+    description: seoDescription,
     images: [siteConfig.openGraphImage],
   },
   icons: {
@@ -58,6 +89,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {structuredData ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+            }}
+          />
+        ) : null}
         <EnquiryProvider>
           <FloatingNavbar />
           <main id="main-content">{children}</main>
