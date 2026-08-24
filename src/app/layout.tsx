@@ -15,20 +15,54 @@ const structuredData = isIndexable
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
-          "@id": `${siteUrl}/#organization`,
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
           name: siteConfig.name,
           alternateName: `${siteConfig.name} - ${siteConfig.descriptor}`,
+          description: seoDescription,
           url: siteUrl,
           email: contactDetails.email.value,
           telephone: contactDetails.primaryPhone.value,
+          hasMap: contactDetails.mapsUrl,
           sameAs: [
             contactDetails.instagram.href,
             contactDetails.facebook.href,
           ],
-          areaServed: {
-            "@type": "City",
-            name: "Yangon",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Yangon",
+            addressCountry: "MM",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 16.821225,
+            longitude: 96.126225,
+          },
+          areaServed: [
+            {
+              "@type": "City",
+              name: "Yangon",
+            },
+            {
+              "@type": "Country",
+              name: "Myanmar",
+            },
+          ],
+          knowsAbout: [
+            "Wedding invitations",
+            "Marriage certificate folders",
+            "Invitation suites",
+            "Presentation boxes",
+            "Wedding stationery",
+            "Custom stationery",
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: contactDetails.primaryPhone.value,
+            email: contactDetails.email.value,
+            contactType: "customer service",
+            areaServed: "MM",
+            availableLanguage: ["English", "Burmese"],
           },
         },
         {
@@ -38,7 +72,7 @@ const structuredData = isIndexable
           name: siteConfig.name,
           description: seoDescription,
           publisher: {
-            "@id": `${siteUrl}/#organization`,
+            "@id": `${siteUrl}/#business`,
           },
           inLanguage: "en",
         },
