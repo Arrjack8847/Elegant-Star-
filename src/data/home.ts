@@ -136,8 +136,3 @@ export const processSteps = [
     image: siteMedia.homepage.orderingProcess.productionAndPresentation,
   },
 ] as const;
-
-export const enquiryStyles = homepageCategories.map((category, index) => ({
-  value: category.title,
-  image: categoryImage(category.filter, index),
-}));

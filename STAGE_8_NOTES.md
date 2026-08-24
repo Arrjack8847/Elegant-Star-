@@ -10,7 +10,7 @@
 - Added a desktop sticky scroll story with a mobile-safe vertical fallback.
 - Added interactive craft and process selectors.
 - Added combined gallery browsing with filters and search.
-- Added a four-step guided enquiry experience.
+- Added a social media showcase with direct studio contact options.
 - Added supporting pages for collections, stories, gallery, craft, about and contact.
 - Updated sitemap for all 63 collection pages and five story pages.
 - Removed unused fictional design assets and unused collection/craft/studio placeholders.

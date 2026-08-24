@@ -66,6 +66,13 @@ const homepage = {
     productionAndPresentation:
       "/media/craftsmanship/04-packaging-gifts-and-favours/04-packaging-gifts-and-favours__cover.jpg",
   },
+  socialMediaShowcase: {
+    featuredInvitation:
+      "/media/collections/wedding-invitations/floral-ivory-and-gold-wedding-invitation/cover1.jpg",
+    paperDetail:
+      "/media/craftsmanship/01-paper-and-texture/01-paper-and-texture__detail-07.jpg",
+    studioDisplay: "/media/brand/showroom/elegant-star__showroom-16.jpg",
+  },
 } as const;
 
 const stories = {

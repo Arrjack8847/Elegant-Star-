@@ -38,8 +38,8 @@ export function Footer() {
           </p>
 
           <p className="mt-6 max-w-md text-sm leading-7 text-brand-ivory/64">
-            Real stationery collections, privacy-safe celebration stories and a
-            guided enquiry experience - without a database or CMS.
+            Wedding invitations, certificate folders and coordinated stationery,
+            thoughtfully created in Yangon.
           </p>
         </div>
 
@@ -70,12 +70,11 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 flex max-w-6xl flex-col gap-3 border-t border-brand-ivory/14 pt-6 text-xs leading-6 text-brand-ivory/50 sm:mt-14 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto mt-12 max-w-6xl border-t border-brand-ivory/14 pt-6 text-xs leading-6 text-brand-ivory/50 sm:mt-14">
         <p>
           Copyright {new Date().getFullYear()} Elegant Star. Invitations &
           Creation.
         </p>
-        <p>Static Next.js build / No database required</p>
       </div>
     </Reveal>
   );

@@ -7,7 +7,7 @@ import { VisualCategoryExplorer } from "@/components/home/VisualCategoryExplorer
 import { InteractiveCraftsmanship } from "@/components/home/InteractiveCraftsmanship";
 import { SimpleOrderingProcess } from "@/components/home/SimpleOrderingProcess";
 import { ClientTestimonial } from "@/components/home/ClientTestimonial";
-import { GuidedEnquiryExperience } from "@/components/home/GuidedEnquiryExperience";
+import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
 
 export const metadata: Metadata = {
   title: "Wedding Invitations & Stationery in Yangon",
@@ -36,7 +36,7 @@ export default function HomePage() {
       <InteractiveCraftsmanship />
       <SimpleOrderingProcess />
       <ClientTestimonial />
-      <GuidedEnquiryExperience />
+      <SocialMediaShowcase />
     </>
   );
 }

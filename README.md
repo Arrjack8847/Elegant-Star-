@@ -1,6 +1,6 @@
 # Elegant Star — Invitations & Creation
 
-A premium wedding and celebration stationery showcase website for **Elegant Star Invitations & Creation**. The project presents invitation collections, certificate folders, premium boxed sets, materials, celebration stories, galleries, and a guided enquiry experience.
+A premium wedding and celebration stationery showcase website for **Elegant Star Invitations & Creation**. The project presents invitation collections, certificate folders, premium boxed sets, materials, celebration stories, galleries, and direct social and contact options.
 
 ## Live Demo
 
@@ -10,42 +10,42 @@ A premium wedding and celebration stationery showcase website for **Elegant Star
 
 Elegant Star is a visually rich, editorial-style web experience designed to showcase custom invitation design and printing for weddings, traditional ceremonies, corporate events, and meaningful celebrations.
 
-The site connects digital storytelling with real stationery craftsmanship. Visitors can browse collections, explore material details, view celebration stories, discover different invitation styles, and begin an enquiry through a simple guided process.
+The site connects digital storytelling with real stationery craftsmanship. Visitors can browse collections, explore material details, view celebration stories, discover different invitation styles, and contact the studio directly.
 
 ## Features
 
-* Premium responsive website for desktop, tablet, and mobile
-* Interactive invitation-envelope hero section
-* Featured invitation and stationery collections
-* Collection browsing with keyboard and touch-friendly interactions
-* Celebration story sections that connect stationery to real events
-* Category explorer for wedding invitations, certificate folders, heritage designs, premium box sets, and more
-* Craftsmanship showcase covering paper, texture, foil, embossing, ribbons, packaging, and customisation
-* Step-by-step ordering process
-* Gallery for collections and celebration stories
-* Privacy-safe testimonial presentation
-* Guided enquiry flow for occasion, product, style, and event details
-* Static content architecture with no database or CMS required
+- Premium responsive website for desktop, tablet, and mobile
+- Interactive invitation-envelope hero section
+- Featured invitation and stationery collections
+- Collection browsing with keyboard and touch-friendly interactions
+- Celebration story sections that connect stationery to real events
+- Category explorer for wedding invitations, certificate folders, heritage designs, premium box sets, and more
+- Craftsmanship showcase covering paper, texture, foil, embossing, ribbons, packaging, and customisation
+- Step-by-step ordering process
+- Gallery for collections and celebration stories
+- Privacy-safe testimonial presentation
+- Social media showcase with direct Instagram, Facebook, Messenger, and Viber links
+- Static content architecture with no database or CMS required
 
 ## Tech Stack
 
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
-* GSAP
-* Lucide Icons
-* Vercel
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- GSAP
+- Lucide Icons
+- Vercel
 
 ## Main Sections
 
-* **Home** — Brand introduction and invitation hero experience
-* **Collections** — Curated stationery directions and product showcases
-* **Stories** — Celebration-focused visual storytelling
-* **Gallery** — Collection and event-inspired visual library
-* **Our Craft** — Materials, finishing details, and presentation features
-* **About** — Elegant Star brand and service information
-* **Contact / Enquiry** — Guided client enquiry experience
+- **Home** — Brand introduction and invitation hero experience
+- **Collections** — Curated stationery directions and product showcases
+- **Stories** — Celebration-focused visual storytelling
+- **Gallery** — Collection and event-inspired visual library
+- **Our Craft** — Materials, finishing details, and presentation features
+- **About** — Elegant Star brand and service information
+- **Contact / Enquiry** — Studio details, contact channels, location, and enquiry preparation
 
 ## Project Structure
 
@@ -108,12 +108,12 @@ Live website: https://elegant-star-3gk1.vercel.app/
 
 Add screenshots of these sections here:
 
-* Interactive envelope hero
-* Featured collections
-* Celebration story section
-* Craftsmanship section
-* Guided enquiry flow
-* Mobile layout
+- Interactive envelope hero
+- Featured collections
+- Celebration story section
+- Craftsmanship section
+- Social media and contact showcase
+- Mobile layout
 
 Example:
 
@@ -123,19 +123,19 @@ Example:
 
 ## What I Learned
 
-* Building high-end editorial interfaces with reusable React components
-* Designing responsive layouts for both desktop and mobile experiences
-* Creating interactive web experiences with GSAP and modern frontend patterns
-* Organising a content-rich website with static TypeScript data
-* Building accessible interactions for keyboard, touch, and mouse users
-* Creating polished portfolio websites without requiring a database or CMS
+- Building high-end editorial interfaces with reusable React components
+- Designing responsive layouts for both desktop and mobile experiences
+- Creating interactive web experiences with GSAP and modern frontend patterns
+- Organising a content-rich website with static TypeScript data
+- Building accessible interactions for keyboard, touch, and mouse users
+- Creating polished portfolio websites without requiring a database or CMS
 
 ## Author
 
 **Soe Min Khant**
 
-* GitHub: [Arrjack8847](https://github.com/Arrjack8847)
-* Portfolio: [JackNex Studio](https://jack-nex-studio.vercel.app/)
+- GitHub: [Arrjack8847](https://github.com/Arrjack8847)
+- Portfolio: [JackNex Studio](https://jack-nex-studio.vercel.app/)
 
 ---
 

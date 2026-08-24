@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { ComponentType, SVGProps } from "react";
+import type { ComponentType } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -15,6 +15,11 @@ import {
 import { EnquiryButton } from "@/components/enquiry/EnquiryButton";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import {
+  FacebookIcon,
+  InstagramIcon,
+  type BrandIconProps,
+} from "@/components/ui/BrandIcons";
+import {
   companyCopy,
   contactChannels,
   contactDetails,
@@ -28,50 +33,6 @@ export const metadata: Metadata = {
   description:
     "Contact Elegant Star Invitations & Creation, explore the showroom location and prepare an invitation or stationery enquiry.",
 };
-
-/* -------------------------------------------------------------------------- */
-/*                               BRAND ICONS                                  */
-/* -------------------------------------------------------------------------- */
-
-type BrandIconProps = SVGProps<SVGSVGElement> & {
-  size?: number;
-};
-
-function InstagramIcon({ size = 24, ...props }: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-
-      <circle cx="12" cy="12" r="4" />
-
-      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function FacebookIcon({ size = 24, ...props }: BrandIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      {...props}
-    >
-      <path d="M13.55 22v-8.3h2.8l.42-3.25h-3.22V8.38c0-.94.26-1.58 1.61-1.58h1.72V3.9a23.1 23.1 0 0 0-2.5-.13c-2.48 0-4.18 1.51-4.18 4.29v2.39H7.4v3.25h2.8V22h3.35Z" />
-    </svg>
-  );
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                  DATA                                      */
@@ -95,10 +56,7 @@ const enquiryChecklist = [
   "Estimated quantity and required date",
 ] as const;
 
-function shouldOpenNewTab(
-  kind: ContactChannelKind,
-  external: boolean,
-) {
+function shouldOpenNewTab(kind: ContactChannelKind, external: boolean) {
   const mobileMessagingChannels: ContactChannelKind[] = [
     "messenger",
     "viber",
@@ -518,7 +476,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Guided enquiry */}
+      {/* Enquiry preparation */}
       <section
         className={cn(
           "section-shell bg-brand-white/42",
@@ -527,7 +485,7 @@ export default function ContactPage() {
           "lg:!py-28",
         )}
         data-nav-theme="light"
-        aria-labelledby="guided-contact-heading"
+        aria-labelledby="contact-preparation-heading"
       >
         <RevealGroup
           className={cn(
@@ -552,11 +510,11 @@ export default function ContactPage() {
           >
             <div>
               <p className="small-label text-brand-ivory/65">
-                Guided preparation
+                Helpful preparation
               </p>
 
               <h2
-                id="guided-contact-heading"
+                id="contact-preparation-heading"
                 className={cn(
                   "mt-4 max-w-[12ch]",
                   "font-display font-normal",
@@ -569,12 +527,12 @@ export default function ContactPage() {
               </h2>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-brand-white/76">
-                Use the guided enquiry to organise the occasion, product type
-                and preferred visual direction before contacting the studio.
+                Send your event date, approximate quantity, preferred style or a
+                reference photo. We’ll help you shape the rest.
               </p>
 
               <Link
-                href="/#guided-enquiry"
+                href="/contact"
                 className={cn(
                   "group mt-8 inline-flex min-h-12",
                   "items-center gap-3",
@@ -594,7 +552,7 @@ export default function ContactPage() {
                 )}
               >
                 <Sparkles size={17} aria-hidden="true" />
-                Open guided enquiry
+                View contact options
                 <ArrowUpRight
                   size={16}
                   aria-hidden="true"

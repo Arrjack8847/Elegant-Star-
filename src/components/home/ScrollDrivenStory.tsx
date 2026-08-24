@@ -83,10 +83,7 @@ function getDesktopActivationPoint(viewportHeight: number) {
 }
 
 function getMobileActivationPoint(viewportHeight: number) {
-  return Math.min(
-    Math.max(viewportHeight * 0.3, 150),
-    280,
-  );
+  return Math.min(Math.max(viewportHeight * 0.3, 150), 280);
 }
 
 export function ScrollDrivenStory() {
@@ -96,9 +93,9 @@ export function ScrollDrivenStory() {
     Array<HTMLDivElement | null>
   >([]);
 
-  const mobileSceneRefs = useRef<
-    Array<HTMLElement | null>
-  >([]);
+  const mobileSceneRefs = useRef<Array<HTMLElement | null>>(
+    [],
+  );
 
   useEffect(() => {
     const desktopQuery = window.matchMedia(
@@ -123,8 +120,7 @@ export function ScrollDrivenStory() {
       animationFrameId = null;
 
       const nodes = getCurrentSceneNodes();
-      const activationPoint =
-        getCurrentActivationPoint();
+      const activationPoint = getCurrentActivationPoint();
 
       let nextActive = 0;
 
@@ -166,10 +162,9 @@ export function ScrollDrivenStory() {
         return;
       }
 
-      animationFrameId =
-        window.requestAnimationFrame(
-          updateActiveScene,
-        );
+      animationFrameId = window.requestAnimationFrame(
+        updateActiveScene,
+      );
     };
 
     const disconnectSceneObserver = () => {
@@ -184,8 +179,7 @@ export function ScrollDrivenStory() {
         return;
       }
 
-      const activationPoint =
-        getCurrentActivationPoint();
+      const activationPoint = getCurrentActivationPoint();
 
       const bottomMargin = Math.max(
         window.innerHeight - activationPoint - 1,
@@ -246,10 +240,7 @@ export function ScrollDrivenStory() {
       },
     );
 
-    window.addEventListener(
-      "resize",
-      handleViewportChange,
-    );
+    window.addEventListener("resize", handleViewportChange);
 
     window.addEventListener(
       "orientationchange",
@@ -304,9 +295,7 @@ export function ScrollDrivenStory() {
       disconnectSceneObserver();
 
       if (animationFrameId !== null) {
-        window.cancelAnimationFrame(
-          animationFrameId,
-        );
+        window.cancelAnimationFrame(animationFrameId);
       }
     };
   }, []);
@@ -324,23 +313,19 @@ export function ScrollDrivenStory() {
       return;
     }
 
-    const prefersReducedMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const nodeTop =
-      window.scrollY +
-      node.getBoundingClientRect().top;
+      window.scrollY + node.getBoundingClientRect().top;
 
     /*
      * Desktop chapters align with the cinematic activation
      * line. Mobile cards align close to the top of the screen.
      */
     const targetOffset = isDesktop
-      ? getDesktopActivationPoint(
-          window.innerHeight,
-        ) - 1
+      ? getDesktopActivationPoint(window.innerHeight) - 1
       : 20;
 
     const targetScrollTop = Math.max(
@@ -350,19 +335,14 @@ export function ScrollDrivenStory() {
 
     window.scrollTo({
       top: targetScrollTop,
-      behavior: prefersReducedMotion
-        ? "auto"
-        : "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   };
 
   const progress =
-    scenes.length > 1
-      ? active / (scenes.length - 1)
-      : 0;
+    scenes.length > 1 ? active / (scenes.length - 1) : 0;
 
-  const mobileProgress =
-    (active + 1) / scenes.length;
+  const mobileProgress = (active + 1) / scenes.length;
 
   return (
     <SectionTransition
@@ -386,8 +366,7 @@ export function ScrollDrivenStory() {
             <div className="relative h-full w-full overflow-hidden lg:rounded-tl-[3.5rem]">
               {scenes.map((scene, index) => {
                 const isActive = active === index;
-                const isPrevious =
-                  index < active;
+                const isPrevious = index < active;
 
                 return (
                   <Image
@@ -402,8 +381,7 @@ export function ScrollDrivenStory() {
                     priority={index === 0}
                     sizes="(min-width: 1600px) 864px, 54vw"
                     style={{
-                      objectPosition:
-                        scene.objectPosition,
+                      objectPosition: scene.objectPosition,
                     }}
                     className={cn(
                       "object-cover will-change-[opacity,transform]",
@@ -430,9 +408,7 @@ export function ScrollDrivenStory() {
                 {scenes.map((scene, index) => (
                   <p
                     key={scene.id}
-                    aria-hidden={
-                      active !== index
-                    }
+                    aria-hidden={active !== index}
                     className={cn(
                       "small-label absolute left-0 top-0 whitespace-nowrap",
                       "text-brand-ivory/70",
@@ -459,22 +435,18 @@ export function ScrollDrivenStory() {
                       <span
                         className="absolute inset-y-0 left-0 w-full origin-left bg-brand-champagne transition-transform duration-700 ease-out motion-reduce:transition-none"
                         style={{
-                          transform: `scaleX(${
-                            (active + 1) /
-                            scenes.length
-                          })`,
+                          transform: `scaleX(${(active + 1) / scenes.length})`,
                         }}
                       />
                     </div>
 
                     <span className="min-w-12 text-right text-xs font-bold tabular-nums">
-                      {String(
-                        active + 1,
-                      ).padStart(2, "0")}{" "}
+                      {String(active + 1).padStart(2, "0")}{" "}
                       /{" "}
-                      {String(
-                        scenes.length,
-                      ).padStart(2, "0")}
+                      {String(scenes.length).padStart(
+                        2,
+                        "0",
+                      )}
                     </span>
                   </div>
                 </div>
@@ -497,9 +469,9 @@ export function ScrollDrivenStory() {
             </h2>
 
             <p className="mt-6 max-w-lg text-base leading-7 text-brand-ivory/70 xl:mt-7 xl:text-lg xl:leading-8">
-              Follow one Elegant Star invitation
-              from its first printed detail to the
-              celebration it was created for.
+              Follow one Elegant Star invitation from its
+              first printed detail to the celebration it was
+              created for.
             </p>
           </header>
 
@@ -521,214 +493,194 @@ export function ScrollDrivenStory() {
                   />
                 </div>
 
-                {scenes.map(
-                  (scene, index) => {
-                    const isActive =
-                      active === index;
+                {scenes.map((scene, index) => {
+                  const isActive = active === index;
 
-                    const isComplete =
-                      index < active;
+                  const isComplete = index < active;
 
-                    return (
-                      <button
-                        key={scene.id}
-                        type="button"
-                        onClick={() =>
-                          scrollToScene(index)
-                        }
-                        aria-label={`Go to chapter ${
-                          index + 1
-                        }: ${scene.label}`}
-                        aria-current={
-                          isActive
-                            ? "step"
-                            : undefined
-                        }
-                        className={cn(
-                          "relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
-                          "border text-[10px] font-bold tabular-nums",
-                          "transition-[color,background-color,border-color,transform] duration-300",
-                          "motion-reduce:transform-none motion-reduce:transition-none",
-                          "focus-visible:outline-none focus-visible:ring-2",
-                          "focus-visible:ring-brand-champagne focus-visible:ring-offset-4",
-                          "focus-visible:ring-offset-brand-olive",
-                          isActive &&
-                            "scale-110 border-brand-champagne bg-brand-champagne text-brand-olive",
-                          isComplete &&
-                            !isActive &&
-                            "border-brand-champagne bg-brand-olive text-brand-champagne",
+                  return (
+                    <button
+                      key={scene.id}
+                      type="button"
+                      onClick={() => scrollToScene(index)}
+                      aria-label={`Go to chapter ${index + 1}: ${scene.label}`}
+                      aria-current={
+                        isActive ? "step" : undefined
+                      }
+                      className={cn(
+                        "relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                        "border text-[10px] font-bold tabular-nums",
+                        "transition-[color,background-color,border-color,transform] duration-300",
+                        "motion-reduce:transform-none motion-reduce:transition-none",
+                        "focus-visible:outline-none focus-visible:ring-2",
+                        "focus-visible:ring-brand-champagne focus-visible:ring-offset-4",
+                        "focus-visible:ring-offset-brand-olive",
+                        isActive &&
+                          "scale-110 border-brand-champagne bg-brand-champagne text-brand-olive",
+                        isComplete &&
                           !isActive &&
-                            !isComplete &&
-                            "border-brand-ivory/25 bg-brand-olive text-brand-ivory/55",
-                        )}
-                      >
-                        {scene.number}
-                      </button>
-                    );
-                  },
-                )}
+                          "border-brand-champagne bg-brand-olive text-brand-champagne",
+                        !isActive &&
+                          !isComplete &&
+                          "border-brand-ivory/25 bg-brand-olive text-brand-ivory/55",
+                      )}
+                    >
+                      {scene.number}
+                    </button>
+                  );
+                })}
               </div>
             </nav>
 
             <div className="min-w-0">
-              {scenes.map(
-                (scene, index) => {
-                  const isActive =
-                    active === index;
+              {scenes.map((scene, index) => {
+                const isActive = active === index;
 
-                  const isFinalScene =
-                    index ===
-                    scenes.length - 1;
+                const isFinalScene =
+                  index === scenes.length - 1;
 
-                  return (
-                    <div
-                      key={scene.id}
-                      ref={(node) => {
-                        desktopSceneRefs.current[
-                          index
-                        ] = node;
-                      }}
-                      data-scene={index}
+                return (
+                  <div
+                    key={scene.id}
+                    ref={(node) => {
+                      desktopSceneRefs.current[index] =
+                        node;
+                    }}
+                    data-scene={index}
+                    className={cn(
+                      "flex min-w-0 items-center",
+                      isFinalScene
+                        ? "min-h-[clamp(28rem,64dvh,40rem)]"
+                        : "min-h-[clamp(30rem,70dvh,44rem)]",
+                    )}
+                  >
+                    <article
                       className={cn(
-                        "flex min-w-0 items-center",
-                        isFinalScene
-                          ? "min-h-[clamp(28rem,64dvh,40rem)]"
-                          : "min-h-[clamp(30rem,70dvh,44rem)]",
+                        "min-w-0 max-w-xl",
+                        "transition-[opacity,transform] duration-500",
+                        "motion-reduce:transform-none motion-reduce:transition-none",
+                        isActive
+                          ? "translate-y-0 opacity-100"
+                          : "translate-y-4 opacity-65",
                       )}
                     >
-                      <article
+                      <p
                         className={cn(
-                          "min-w-0 max-w-xl",
+                          "small-label text-brand-champagne",
                           "transition-[opacity,transform] duration-500",
                           "motion-reduce:transform-none motion-reduce:transition-none",
                           isActive
                             ? "translate-y-0 opacity-100"
-                            : "translate-y-4 opacity-65",
+                            : "translate-y-2 opacity-70",
                         )}
+                        style={{
+                          transitionDelay: isActive
+                            ? "40ms"
+                            : "0ms",
+                        }}
                       >
-                        <p
+                        {scene.label}
+                      </p>
+
+                      <h3
+                        className={cn(
+                          "mt-4 break-words font-display",
+                          "text-[clamp(3rem,4vw,4.5rem)] leading-[0.94]",
+                          "transition-[opacity,transform] duration-500",
+                          "motion-reduce:transform-none motion-reduce:transition-none",
+                          isActive
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-3 opacity-80",
+                        )}
+                        style={{
+                          transitionDelay: isActive
+                            ? "90ms"
+                            : "0ms",
+                        }}
+                      >
+                        {scene.title}
+                      </h3>
+
+                      <p
+                        className={cn(
+                          "mt-6 max-w-lg text-base leading-7 text-brand-ivory/70",
+                          "transition-[opacity,transform] duration-500",
+                          "motion-reduce:transform-none motion-reduce:transition-none",
+                          "xl:mt-7 xl:text-lg xl:leading-8",
+                          isActive
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-3 opacity-75",
+                        )}
+                        style={{
+                          transitionDelay: isActive
+                            ? "140ms"
+                            : "0ms",
+                        }}
+                      >
+                        {scene.text}
+                      </p>
+
+                      {isFinalScene ? (
+                        <div
                           className={cn(
-                            "small-label text-brand-champagne",
+                            "mt-8 flex flex-wrap items-center gap-3",
                             "transition-[opacity,transform] duration-500",
                             "motion-reduce:transform-none motion-reduce:transition-none",
                             isActive
                               ? "translate-y-0 opacity-100"
-                              : "translate-y-2 opacity-70",
+                              : "pointer-events-none translate-y-3 opacity-0",
                           )}
                           style={{
-                            transitionDelay:
-                              isActive
-                                ? "40ms"
-                                : "0ms",
+                            transitionDelay: isActive
+                              ? "190ms"
+                              : "0ms",
                           }}
                         >
-                          {scene.label}
-                        </p>
-
-                        <h3
-                          className={cn(
-                            "mt-4 break-words font-display",
-                            "text-[clamp(3rem,4vw,4.5rem)] leading-[0.94]",
-                            "transition-[opacity,transform] duration-500",
-                            "motion-reduce:transform-none motion-reduce:transition-none",
-                            isActive
-                              ? "translate-y-0 opacity-100"
-                              : "translate-y-3 opacity-80",
-                          )}
-                          style={{
-                            transitionDelay:
-                              isActive
-                                ? "90ms"
-                                : "0ms",
-                          }}
-                        >
-                          {scene.title}
-                        </h3>
-
-                        <p
-                          className={cn(
-                            "mt-6 max-w-lg text-base leading-7 text-brand-ivory/70",
-                            "transition-[opacity,transform] duration-500",
-                            "motion-reduce:transform-none motion-reduce:transition-none",
-                            "xl:mt-7 xl:text-lg xl:leading-8",
-                            isActive
-                              ? "translate-y-0 opacity-100"
-                              : "translate-y-3 opacity-75",
-                          )}
-                          style={{
-                            transitionDelay:
-                              isActive
-                                ? "140ms"
-                                : "0ms",
-                          }}
-                        >
-                          {scene.text}
-                        </p>
-
-                        {isFinalScene ? (
-                          <div
+                          <Link
+                            href={`/stories/${featuredStory.slug}`}
                             className={cn(
-                              "mt-8 flex flex-wrap items-center gap-3",
-                              "transition-[opacity,transform] duration-500",
+                              "inline-flex min-h-12 items-center justify-center gap-2 rounded-full",
+                              "bg-brand-ivory px-5 py-3 text-sm font-bold",
+                              "text-brand-olive transition duration-300",
                               "motion-reduce:transform-none motion-reduce:transition-none",
-                              isActive
-                                ? "translate-y-0 opacity-100"
-                                : "pointer-events-none translate-y-3 opacity-0",
+                              "hover:-translate-y-0.5 hover:bg-brand-champagne",
+                              "focus-visible:outline-none focus-visible:ring-2",
+                              "focus-visible:ring-brand-champagne",
+                              "focus-visible:ring-offset-4",
+                              "focus-visible:ring-offset-brand-olive",
                             )}
-                            style={{
-                              transitionDelay:
-                                isActive
-                                  ? "190ms"
-                                  : "0ms",
-                            }}
                           >
-                            <Link
-                              href={`/stories/${featuredStory.slug}`}
-                              className={cn(
-                                "inline-flex min-h-12 items-center justify-center gap-2 rounded-full",
-                                "bg-brand-ivory px-5 py-3 text-sm font-bold",
-                                "text-brand-olive transition duration-300",
-                                "motion-reduce:transform-none motion-reduce:transition-none",
-                                "hover:-translate-y-0.5 hover:bg-brand-champagne",
-                                "focus-visible:outline-none focus-visible:ring-2",
-                                "focus-visible:ring-brand-champagne",
-                                "focus-visible:ring-offset-4",
-                                "focus-visible:ring-offset-brand-olive",
-                              )}
-                            >
-                              View the full story
-                              <ArrowRight
-                                size={17}
-                                aria-hidden="true"
-                              />
-                            </Link>
+                            View the full story
+                            <ArrowRight
+                              size={17}
+                              aria-hidden="true"
+                            />
+                          </Link>
 
-                            <Link
-                              href="/#enquiry"
-                              className={cn(
-                                "inline-flex min-h-12 items-center justify-center rounded-full",
-                                "border border-brand-ivory/25 px-5 py-3",
-                                "text-sm font-bold text-brand-ivory",
-                                "transition duration-300",
-                                "motion-reduce:transform-none motion-reduce:transition-none",
-                                "hover:-translate-y-0.5 hover:border-brand-champagne",
-                                "hover:text-brand-champagne",
-                                "focus-visible:outline-none focus-visible:ring-2",
-                                "focus-visible:ring-brand-champagne",
-                                "focus-visible:ring-offset-4",
-                                "focus-visible:ring-offset-brand-olive",
-                              )}
-                            >
-                              Create something
-                              similar
-                            </Link>
-                          </div>
-                        ) : null}
-                      </article>
-                    </div>
-                  );
-                },
-              )}
+                          <Link
+                            href="/contact"
+                            className={cn(
+                              "inline-flex min-h-12 items-center justify-center rounded-full",
+                              "border border-brand-ivory/25 px-5 py-3",
+                              "text-sm font-bold text-brand-ivory",
+                              "transition duration-300",
+                              "motion-reduce:transform-none motion-reduce:transition-none",
+                              "hover:-translate-y-0.5 hover:border-brand-champagne",
+                              "hover:text-brand-champagne",
+                              "focus-visible:outline-none focus-visible:ring-2",
+                              "focus-visible:ring-brand-champagne",
+                              "focus-visible:ring-offset-4",
+                              "focus-visible:ring-offset-brand-olive",
+                            )}
+                          >
+                            Create something similar
+                          </Link>
+                        </div>
+                      ) : null}
+                    </article>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -760,9 +712,9 @@ export function ScrollDrivenStory() {
             </h2>
 
             <p className="mt-5 max-w-md text-[0.95rem] leading-7 text-brand-ivory/70 sm:mt-6 sm:text-base">
-              Follow one Elegant Star invitation
-              from its first printed detail to the
-              celebration it was created for.
+              Follow one Elegant Star invitation from its
+              first printed detail to the celebration it was
+              created for.
             </p>
           </div>
         </header>
@@ -792,14 +744,8 @@ export function ScrollDrivenStory() {
               </div>
 
               <span className="shrink-0 text-xs font-bold tabular-nums text-brand-ivory/65">
-                {String(active + 1).padStart(
-                  2,
-                  "0",
-                )}{" "}
-                /{" "}
-                {String(
-                  scenes.length,
-                ).padStart(2, "0")}
+                {String(active + 1).padStart(2, "0")} /{" "}
+                {String(scenes.length).padStart(2, "0")}
               </span>
             </div>
           </div>
@@ -813,23 +759,16 @@ export function ScrollDrivenStory() {
             )}
           >
             {scenes.map((scene, index) => {
-              const isActive =
-                active === index;
+              const isActive = active === index;
 
               return (
                 <button
                   key={scene.id}
                   type="button"
-                  onClick={() =>
-                    scrollToScene(index)
-                  }
-                  aria-label={`Go to chapter ${
-                    index + 1
-                  }: ${scene.label}`}
+                  onClick={() => scrollToScene(index)}
+                  aria-label={`Go to chapter ${index + 1}: ${scene.label}`}
                   aria-current={
-                    isActive
-                      ? "step"
-                      : undefined
+                    isActive ? "step" : undefined
                   }
                   className={cn(
                     "inline-flex min-h-12 shrink-0 snap-start",
@@ -868,8 +807,7 @@ export function ScrollDrivenStory() {
               <article
                 key={scene.id}
                 ref={(node) => {
-                  mobileSceneRefs.current[index] =
-                    node;
+                  mobileSceneRefs.current[index] = node;
                 }}
                 data-mobile-scene={index}
                 className={cn(
@@ -979,7 +917,6 @@ export function ScrollDrivenStory() {
                           )}
                         >
                           View the full story
-
                           <ArrowRight
                             size={17}
                             className="shrink-0"
@@ -988,7 +925,7 @@ export function ScrollDrivenStory() {
                         </Link>
 
                         <Link
-                          href="/#enquiry"
+                          href="/contact"
                           className={cn(
                             "inline-flex min-h-12 w-full",
                             "touch-manipulation items-center justify-center",
