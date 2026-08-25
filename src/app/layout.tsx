@@ -8,7 +8,7 @@ import { getSiteUrl, hasConfiguredSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
 const isIndexable = hasConfiguredSiteUrl();
-const seoDescription = `${siteConfig.description} Based in Yangon, Myanmar.`;
+const seoDescription = `${siteConfig.name} is a wedding invitation and stationery service based in Yangon, Myanmar. ${siteConfig.description}`;
 
 const structuredData = isIndexable
   ? {
@@ -21,6 +21,8 @@ const structuredData = isIndexable
           alternateName: [
             `${siteConfig.name} - ${siteConfig.descriptor}`,
             "Elegant Star Myanmar",
+            "Elegant Star Yangon",
+            "Elegant Star Invitation",
           ],
           description: seoDescription,
           url: siteUrl,
@@ -116,6 +118,11 @@ const structuredData = isIndexable
           "@id": `${siteUrl}/#website`,
           url: siteUrl,
           name: siteConfig.name,
+          alternateName: [
+            "Elegant Star Myanmar",
+            "Elegant Star Yangon",
+            "Elegant Star Invitation",
+          ],
           description: seoDescription,
           publisher: {
             "@id": `${siteUrl}/#business`,
