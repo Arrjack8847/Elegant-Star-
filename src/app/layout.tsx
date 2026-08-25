@@ -54,6 +54,7 @@ const structuredData = isIndexable
             },
           ],
           knowsAbout: [
+            "Wedding service in Myanmar",
             "Wedding invitations",
             "Wedding invitation cards",
             "Marriage certificate folders",
@@ -66,6 +67,19 @@ const structuredData = isIndexable
             "@type": "OfferCatalog",
             name: "Wedding invitation and stationery services",
             itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Wedding invitation and stationery service in Myanmar",
+                  serviceType:
+                    "Wedding service focused on invitation design, certificate folders and coordinated stationery",
+                  areaServed: {
+                    "@type": "Country",
+                    name: "Myanmar",
+                  },
+                },
+              },
               {
                 "@type": "Offer",
                 itemOffered: {
