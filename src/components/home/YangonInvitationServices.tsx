@@ -11,24 +11,24 @@ export function YangonInvitationServices() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
           <div>
             <p className="small-label text-brand-sage">
-              Wedding invitation studio · Yangon
+              Wedding invitation &amp; stationery service · Myanmar
             </p>
 
             <h2
               id="yangon-invitation-services-heading"
               className="display-heading mt-4 max-w-[13ch] text-[clamp(2.5rem,8vw,4.5rem)] leading-[0.98] text-brand-olive"
             >
-              Wedding invitation cards &amp; stationery in Yangon
+              Wedding invitation cards &amp; stationery in Yangon, Myanmar
             </h2>
           </div>
 
           <div className="max-w-2xl">
             <p className="body-copy text-base leading-8 sm:text-lg">
-              Elegant Star creates custom wedding invitation cards, marriage
-              certificate folders and coordinated wedding stationery for
-              celebrations in Yangon, Myanmar. Designs can be personalised with
-              wording, colour direction, format and finishing details during
-              consultation.
+              Elegant Star is a wedding invitation and stationery service in
+              Myanmar, creating custom wedding invitation cards, marriage
+              certificate folders and coordinated wedding stationery from its
+              Yangon studio. Designs can be personalised with wording, colour
+              direction, format and finishing details during consultation.
             </p>
 
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
@@ -74,7 +74,7 @@ export function YangonInvitationServices() {
                 href="/contact"
                 className="underline decoration-brand-sage/50 underline-offset-4 transition-opacity hover:opacity-65"
               >
-                Enquire with the Yangon studio
+                Enquire with Elegant Star
               </Link>
             </div>
           </div>
