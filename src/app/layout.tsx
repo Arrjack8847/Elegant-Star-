@@ -50,12 +50,55 @@ const structuredData = isIndexable
           ],
           knowsAbout: [
             "Wedding invitations",
+            "Wedding invitation cards",
             "Marriage certificate folders",
             "Invitation suites",
             "Presentation boxes",
             "Wedding stationery",
             "Custom stationery",
           ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Wedding invitation and stationery services",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Custom wedding invitation cards",
+                  serviceType: "Wedding invitation card design and stationery",
+                  areaServed: {
+                    "@type": "City",
+                    name: "Yangon",
+                  },
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Marriage certificate folders",
+                  serviceType: "Marriage certificate folder design and presentation",
+                  areaServed: {
+                    "@type": "City",
+                    name: "Yangon",
+                  },
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Coordinated wedding stationery",
+                  serviceType: "Custom wedding stationery and celebration pieces",
+                  areaServed: {
+                    "@type": "City",
+                    name: "Yangon",
+                  },
+                },
+              },
+            ],
+          },
           contactPoint: {
             "@type": "ContactPoint",
             telephone: contactDetails.primaryPhone.value,
