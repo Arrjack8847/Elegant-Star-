@@ -20,6 +20,13 @@ export default async function DesignLayout({
   const design = getCollectionBySlug(slug);
   const siteUrl = getConfiguredSiteUrl();
 
+  const primaryImage =
+    design && siteUrl
+      ? [design.cover1, design.cover2, design.coverImage, ...design.images].find(
+          Boolean,
+        )
+      : null;
+
   const structuredData =
     design && siteUrl
       ? {
@@ -49,47 +56,25 @@ export default async function DesignLayout({
               ],
             },
             {
-              "@type": "Product",
-              "@id": `${siteUrl}/designs/${design.slug}#product`,
+              "@type": "WebPage",
+              "@id": `${siteUrl}/designs/${design.slug}#webpage`,
+              url: `${siteUrl}/designs/${design.slug}`,
               name: design.name,
               description: design.fullDescription,
-              sku: design.reference,
-              category: design.categories.join(", "),
-              url: `${siteUrl}/designs/${design.slug}`,
-              mainEntityOfPage: `${siteUrl}/designs/${design.slug}`,
-              brand: {
-                "@type": "Brand",
-                name: "Elegant Star",
+              isPartOf: {
+                "@id": `${siteUrl}/#website`,
               },
-              image: [
-                design.cover1,
-                design.cover2,
-                design.coverImage,
-                ...design.images,
-              ]
-                .filter(
-                  (image, index, list): image is string =>
-                    Boolean(image) && list.indexOf(image) === index,
-                )
-                .slice(0, 8)
-                .map((image) => absoluteUrl(siteUrl, image)),
-              additionalProperty: [
-                {
-                  "@type": "PropertyValue",
-                  name: "Materials",
-                  value: design.materials.join(", "),
-                },
-                {
-                  "@type": "PropertyValue",
-                  name: "Finishes",
-                  value: design.finishes.join(", "),
-                },
-                {
-                  "@type": "PropertyValue",
-                  name: "Personalisation",
-                  value: design.personalization.join(", "),
-                },
-              ],
+              about: {
+                "@id": `${siteUrl}/#business`,
+              },
+              ...(primaryImage
+                ? {
+                    primaryImageOfPage: {
+                      "@type": "ImageObject",
+                      url: absoluteUrl(siteUrl, primaryImage),
+                    },
+                  }
+                : {}),
             },
           ],
         }
