@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     "Discover custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery in Yangon, Myanmar. Explore Elegant Star designs and enquire for personalisation.",
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      my: "/my",
+      "x-default": "/",
+    },
   },
   openGraph: {
     title: "Wedding Invitation Cards & Stationery Yangon | Elegant Star",

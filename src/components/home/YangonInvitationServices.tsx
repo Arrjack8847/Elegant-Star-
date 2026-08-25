@@ -76,6 +76,13 @@ export function YangonInvitationServices() {
               >
                 Enquire with the Yangon studio
               </Link>
+              <Link
+                href="/my"
+                hrefLang="my"
+                className="underline decoration-brand-sage/50 underline-offset-4 transition-opacity hover:opacity-65"
+              >
+                မြန်မာလို ဖတ်ရန်
+              </Link>
             </div>
           </div>
         </div>
