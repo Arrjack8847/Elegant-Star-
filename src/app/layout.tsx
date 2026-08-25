@@ -11,7 +11,7 @@ const isIndexable = hasConfiguredSiteUrl();
 const seoDescription = `${siteConfig.name} is a wedding invitation and stationery service based in Yangon, Myanmar. ${siteConfig.description}`;
 const preferredSiteName = siteConfig.name;
 const officialBusinessName = `${siteConfig.name} - ${siteConfig.descriptor}`;
-const homepageTitle = "Elegant Star Yangon, Myanmar | Wedding Invitations";
+const homepageTitle = "Elegant Star Myanmar | Wedding Invitations & Stationery";
 
 const structuredData = isIndexable
   ? {
