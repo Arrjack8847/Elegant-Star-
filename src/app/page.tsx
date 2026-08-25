@@ -12,12 +12,13 @@ import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
 import { siteMedia } from "@/data/siteMedia";
 
 const homepageSearchImage = siteMedia.brand.openGraphImage;
-const homepageTitle = "Elegant Star Yangon, Myanmar | Wedding Invitations";
+const homepageTitle = "Elegant Star Myanmar | Wedding Invitations & Stationery";
+const homepageDescription =
+  "Discover Elegant Star, a Yangon wedding invitation studio creating custom invitation cards, marriage certificate folders and coordinated stationery for celebrations across Myanmar.";
 
 export const metadata: Metadata = {
   title: { absolute: homepageTitle },
-  description:
-    "Discover custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery in Yangon, Myanmar. Explore Elegant Star designs and enquire for personalisation.",
+  description: homepageDescription,
   alternates: {
     canonical: "/",
     languages: {
@@ -28,8 +29,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: homepageTitle,
-    description:
-      "Explore custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery from Elegant Star in Yangon, Myanmar.",
+    description: homepageDescription,
     url: "/",
     type: "website",
     images: [
@@ -42,8 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: homepageTitle,
-    description:
-      "Explore custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery from Elegant Star in Yangon, Myanmar.",
+    description: homepageDescription,
     images: [homepageSearchImage],
   },
 };
