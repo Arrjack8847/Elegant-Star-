@@ -71,6 +71,12 @@ export function YangonInvitationServices() {
                 Explore wedding invitation collections
               </Link>
               <Link
+                href="/invitation-service-myanmar"
+                className="underline decoration-brand-sage/50 underline-offset-4 transition-opacity hover:opacity-65"
+              >
+                Invitation service in Myanmar
+              </Link>
+              <Link
                 href="/wedding-service-myanmar"
                 className="underline decoration-brand-sage/50 underline-offset-4 transition-opacity hover:opacity-65"
               >
