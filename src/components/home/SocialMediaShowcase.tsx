@@ -43,7 +43,7 @@ const socialActions = [
   },
   {
     label: "Visit us on Facebook",
-    href: "https://www.facebook.com/share/1CswnjjZyQ/?mibextid=wwXIfr",
+    href: contactDetails.facebook.href,
     ariaLabel: "Visit Elegant Star on Facebook (opens in a new tab)",
     icon: FacebookIcon,
     primary: false,
