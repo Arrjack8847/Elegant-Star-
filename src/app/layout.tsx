@@ -111,9 +111,27 @@ export const metadata: Metadata = {
     images: [siteConfig.openGraphImage],
   },
   icons: {
-    icon: "/brand/brand/elegant-star-mark-white.png",
-    shortcut: "/brand/brand/elegant-star-mark-white.png",
-    apple: "/brand/brand/elegant-star-mark-white.png",
+    icon: [
+      {
+        url: "/brand/brand/icon.png",
+        type: "image/png",
+        sizes: "1998x1998",
+      },
+    ],
+    shortcut: [
+      {
+        url: "/brand/brand/icon.png",
+        type: "image/png",
+        sizes: "1998x1998",
+      },
+    ],
+    apple: [
+      {
+        url: "/brand/brand/icon.png",
+        type: "image/png",
+        sizes: "1998x1998",
+      },
+    ],
   },
 };
 
