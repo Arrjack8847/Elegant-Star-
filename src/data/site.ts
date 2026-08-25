@@ -67,7 +67,7 @@ const instagram = {
 const facebook = {
   label: "Facebook",
   value: "Elegant Star - Invitations & Creation",
-  href: "https://www.facebook.com/share/1CswnjjZyQ/?mibextid=wwXIfr",
+  href: "https://www.facebook.com/61564479194348/",
 } as const;
 
 const messengerPageId = "61564479194348";
