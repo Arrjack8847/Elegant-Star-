@@ -9,6 +9,7 @@ import { getSiteUrl, hasConfiguredSiteUrl } from "@/lib/site-url";
 const siteUrl = getSiteUrl();
 const isIndexable = hasConfiguredSiteUrl();
 const seoDescription = `${siteConfig.name} is a wedding invitation and stationery service based in Yangon, Myanmar. ${siteConfig.description}`;
+const preferredSiteName = "Elegant Star - Invitations & Creation";
 
 const structuredData = isIndexable
   ? {
@@ -17,12 +18,14 @@ const structuredData = isIndexable
         {
           "@type": "LocalBusiness",
           "@id": `${siteUrl}/#business`,
-          name: siteConfig.name,
+          name: preferredSiteName,
           alternateName: [
+            siteConfig.name,
             `${siteConfig.name} - ${siteConfig.descriptor}`,
             "Elegant Star Myanmar",
             "Elegant Star Yangon",
             "Elegant Star Invitation",
+            "Elegant Star Invitations",
           ],
           description: seoDescription,
           url: siteUrl,
@@ -131,11 +134,13 @@ const structuredData = isIndexable
           "@type": "WebSite",
           "@id": `${siteUrl}/#website`,
           url: siteUrl,
-          name: siteConfig.name,
+          name: preferredSiteName,
           alternateName: [
+            siteConfig.name,
             "Elegant Star Myanmar",
             "Elegant Star Yangon",
             "Elegant Star Invitation",
+            "Elegant Star Invitations",
           ],
           description: seoDescription,
           publisher: {
@@ -149,6 +154,7 @@ const structuredData = isIndexable
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: preferredSiteName,
   title: {
     default: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
     template: `%s | ${siteConfig.name}`,
@@ -161,6 +167,7 @@ export const metadata: Metadata = {
         follow: false,
       },
   openGraph: {
+    siteName: preferredSiteName,
     title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
     description: seoDescription,
     type: "website",
