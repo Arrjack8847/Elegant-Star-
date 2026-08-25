@@ -9,9 +9,9 @@ import { InteractiveCraftsmanship } from "@/components/home/InteractiveCraftsman
 import { SimpleOrderingProcess } from "@/components/home/SimpleOrderingProcess";
 import { ClientTestimonial } from "@/components/home/ClientTestimonial";
 import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
+import { siteMedia } from "@/data/siteMedia";
 
-const homepageSearchImage =
-  "/media/brand/showroom/elegant-star__showroom-cover.jpg";
+const homepageSearchImage = siteMedia.brand.openGraphImage;
 
 export const metadata: Metadata = {
   title: "Wedding Invitation Cards & Stationery Yangon",

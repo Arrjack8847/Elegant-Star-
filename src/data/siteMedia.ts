@@ -7,7 +7,7 @@ const brand = {
     white: "/media/brand/brand/elegant-star-mark-white.png",
   },
   mainLogo: "/media/brand/brand/elegant-star-mark-olive.png",
-  openGraphImage: "/media/brand/brand/elegant-star-mark-olive.png",
+  openGraphImage: "/media/brand/showroom/elegant-star__showroom-13.jpg",
   showroom: {
     showroom03: "/media/brand/showroom/elegant-star__showroom-03.jpg",
     showroom04: "/media/brand/showroom/elegant-star__showroom-04.jpg",

@@ -29,6 +29,8 @@ const structuredData = isIndexable
           ],
           description: seoDescription,
           url: siteUrl,
+          image: `${siteUrl}${siteConfig.openGraphImage}`,
+          logo: `${siteUrl}${siteConfig.logo.olive}`,
           email: contactDetails.email.value,
           telephone: contactDetails.primaryPhone.value,
           hasMap: contactDetails.mapsUrl,
@@ -174,7 +176,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: siteConfig.openGraphImage,
-        alt: `${siteConfig.name} brand mark`,
+        alt: `${siteConfig.name} wedding invitation and stationery showroom in Yangon`,
       },
     ],
   },
