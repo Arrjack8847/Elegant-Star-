@@ -9,6 +9,7 @@ import { getSiteUrl, hasConfiguredSiteUrl } from "@/lib/site-url";
 const siteUrl = getSiteUrl();
 const isIndexable = hasConfiguredSiteUrl();
 const seoDescription = `${siteConfig.description} Based in Yangon, Myanmar.`;
+const preferredSiteName = "Elegant Star - Invitations & Creation";
 
 const structuredData = isIndexable
   ? {
@@ -17,8 +18,8 @@ const structuredData = isIndexable
         {
           "@type": "LocalBusiness",
           "@id": `${siteUrl}/#business`,
-          name: siteConfig.name,
-          alternateName: `${siteConfig.name} - ${siteConfig.descriptor}`,
+          name: preferredSiteName,
+          alternateName: siteConfig.name,
           description: seoDescription,
           url: siteUrl,
           email: contactDetails.email.value,
@@ -112,7 +113,8 @@ const structuredData = isIndexable
           "@type": "WebSite",
           "@id": `${siteUrl}/#website`,
           url: siteUrl,
-          name: siteConfig.name,
+          name: preferredSiteName,
+          alternateName: [siteConfig.name, "Elegant Star Invitations"],
           description: seoDescription,
           publisher: {
             "@id": `${siteUrl}/#business`,
@@ -125,6 +127,7 @@ const structuredData = isIndexable
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: preferredSiteName,
   title: {
     default: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
     template: `%s | ${siteConfig.name}`,
@@ -137,6 +140,7 @@ export const metadata: Metadata = {
         follow: false,
       },
   openGraph: {
+    siteName: preferredSiteName,
     title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
     description: seoDescription,
     type: "website",
