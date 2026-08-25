@@ -13,14 +13,14 @@ import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
 export const metadata: Metadata = {
   title: "Wedding Invitation Cards & Stationery Yangon",
   description:
-    "Discover custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery in Yangon, Myanmar. Explore Elegant Star designs and enquire for personalisation.",
+    "Elegant Star is a wedding invitation and stationery service in Myanmar, creating custom wedding invitation cards, marriage certificate folders and coordinated stationery from Yangon.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Wedding Invitation Cards & Stationery Yangon | Elegant Star",
     description:
-      "Explore custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery from Elegant Star in Yangon, Myanmar.",
+      "Elegant Star provides wedding invitation and stationery services in Myanmar, including custom invitation cards, marriage certificate folders and coordinated stationery from Yangon.",
     url: "/",
     type: "website",
   },
