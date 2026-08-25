@@ -18,7 +18,10 @@ const structuredData = isIndexable
           "@type": "LocalBusiness",
           "@id": `${siteUrl}/#business`,
           name: siteConfig.name,
-          alternateName: `${siteConfig.name} - ${siteConfig.descriptor}`,
+          alternateName: [
+            `${siteConfig.name} - ${siteConfig.descriptor}`,
+            "Elegant Star Myanmar",
+          ],
           description: seoDescription,
           url: siteUrl,
           email: contactDetails.email.value,
