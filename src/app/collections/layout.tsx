@@ -6,13 +6,15 @@ const collectionSearchImage =
   "/media/collections/special-one/kinnari-kinnara-brown-velvet-marriage-certificate/cover%201.jpg";
 const collectionDescription =
   "Browse Elegant Star wedding invitations, certificate folders and coordinated stationery collections in Yangon, Myanmar.";
+const collectionTitle = "Wedding Invitation Collections | Elegant Star";
 
 export const metadata: Metadata = {
+  title: { absolute: collectionTitle },
   alternates: {
     canonical: "/collections",
   },
   openGraph: {
-    title: "Elegant Star - Wedding Invitation Collections in Yangon",
+    title: collectionTitle,
     description: collectionDescription,
     url: "/collections",
     type: "website",
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Elegant Star - Wedding Invitation Collections in Yangon",
+    title: collectionTitle,
     description: collectionDescription,
     images: [collectionSearchImage],
   },

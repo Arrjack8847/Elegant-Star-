@@ -9,7 +9,9 @@ import { getSiteUrl, hasConfiguredSiteUrl } from "@/lib/site-url";
 const siteUrl = getSiteUrl();
 const isIndexable = hasConfiguredSiteUrl();
 const seoDescription = `${siteConfig.name} is a wedding invitation and stationery service based in Yangon, Myanmar. ${siteConfig.description}`;
-const preferredSiteName = "Elegant Star - Invitations & Creation";
+const preferredSiteName = siteConfig.name;
+const officialBusinessName = `${siteConfig.name} - ${siteConfig.descriptor}`;
+const homepageTitle = "Elegant Star Yangon, Myanmar | Wedding Invitations";
 
 const structuredData = isIndexable
   ? {
@@ -18,10 +20,9 @@ const structuredData = isIndexable
         {
           "@type": "LocalBusiness",
           "@id": `${siteUrl}/#business`,
-          name: preferredSiteName,
+          name: officialBusinessName,
           alternateName: [
             siteConfig.name,
-            `${siteConfig.name} - ${siteConfig.descriptor}`,
             "Elegant Star Myanmar",
             "Elegant Star Yangon",
             "Elegant Star Invitation",
@@ -158,7 +159,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: preferredSiteName,
   title: {
-    default: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
+    default: homepageTitle,
     template: `%s | ${siteConfig.name}`,
   },
   description: seoDescription,
@@ -170,7 +171,7 @@ export const metadata: Metadata = {
       },
   openGraph: {
     siteName: preferredSiteName,
-    title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
+    title: homepageTitle,
     description: seoDescription,
     type: "website",
     images: [
@@ -182,7 +183,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Wedding Invitations & Stationery Yangon`,
+    title: homepageTitle,
     description: seoDescription,
     images: [siteConfig.openGraphImage],
   },
