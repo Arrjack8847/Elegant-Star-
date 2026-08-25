@@ -7,6 +7,7 @@ const routes = [
   "/",
   "/my",
   "/wedding-service-myanmar",
+  "/invitation-service-myanmar",
   "/collections",
   "/stories",
   "/our-craft",
