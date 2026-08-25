@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EnvelopeHero } from "@/components/home/EnvelopeHero";
 import { SeamlessBrandIntroduction } from "@/components/home/SeamlessBrandIntroduction";
+import { YangonInvitationServices } from "@/components/home/YangonInvitationServices";
 import { InteractiveFeaturedCollections } from "@/components/home/InteractiveFeaturedCollections";
 import { ScrollDrivenStory } from "@/components/home/ScrollDrivenStory";
 import { VisualCategoryExplorer } from "@/components/home/VisualCategoryExplorer";
@@ -10,16 +11,16 @@ import { ClientTestimonial } from "@/components/home/ClientTestimonial";
 import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
 
 export const metadata: Metadata = {
-  title: "Wedding Invitations & Stationery in Yangon",
+  title: "Wedding Invitation Cards & Stationery Yangon",
   description:
-    "Elegant Star creates wedding invitations, marriage certificate folders and coordinated stationery for celebrations in Yangon, Myanmar.",
+    "Discover custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery in Yangon, Myanmar. Explore Elegant Star designs and enquire for personalisation.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Wedding Invitations & Stationery in Yangon | Elegant Star",
+    title: "Wedding Invitation Cards & Stationery Yangon | Elegant Star",
     description:
-      "Explore Elegant Star wedding invitations, marriage certificate folders and coordinated stationery in Yangon, Myanmar.",
+      "Explore custom wedding invitation cards, marriage certificate folders and coordinated wedding stationery from Elegant Star in Yangon, Myanmar.",
     url: "/",
     type: "website",
   },
@@ -30,6 +31,7 @@ export default function HomePage() {
     <>
       <EnvelopeHero />
       <SeamlessBrandIntroduction />
+      <YangonInvitationServices />
       <InteractiveFeaturedCollections />
       <ScrollDrivenStory />
       <VisualCategoryExplorer />
