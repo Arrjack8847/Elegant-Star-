@@ -8,7 +8,7 @@ import { invitationCollections } from "@/data/collections";
 const collectionCount = invitationCollections.length;
 
 export const metadata: Metadata = {
-  title: "Wedding Invitation Collections in Yangon",
+  title: "Wedding Invitation Collections",
   description: `Explore ${collectionCount} Elegant Star wedding invitation and stationery collections in Yangon, including certificate folders, keepsakes and coordinated celebration pieces.`,
 };
 
