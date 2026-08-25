@@ -110,29 +110,6 @@ export const metadata: Metadata = {
     description: seoDescription,
     images: [siteConfig.openGraphImage],
   },
-  icons: {
-    icon: [
-      {
-        url: "/brand/brand/icon.png",
-        type: "image/png",
-        sizes: "1998x1998",
-      },
-    ],
-    shortcut: [
-      {
-        url: "/brand/brand/icon.png",
-        type: "image/png",
-        sizes: "1998x1998",
-      },
-    ],
-    apple: [
-      {
-        url: "/brand/brand/icon.png",
-        type: "image/png",
-        sizes: "1998x1998",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
