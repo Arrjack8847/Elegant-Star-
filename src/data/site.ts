@@ -299,7 +299,7 @@ export const navigation = [
 
 export const companyCopy = {
   homeStatement:
-    "Elegant Star brings together invitation design, certificate folders, coordinated pieces and finishing details so every celebration begins with a thoughtful first impression.",
+    "Elegant Star creates custom wedding invitations, marriage certificate folders and coordinated stationery from its Yangon studio, serving celebrations across Myanmar with personalised wording, materials and finishing details.",
 
   brandStory:
     "The work starts with the feeling of the occasion, then moves through wording, format, colour, paper character and presentation.",
