@@ -6,7 +6,7 @@ import { getConfiguredSiteUrl } from "@/lib/site-url";
 export const metadata: Metadata = {
   title: "မင်္ဂလာဖိတ်စာနှင့် ဖိတ်စာဝန်ဆောင်မှု မြန်မာနိုင်ငံ",
   description:
-    "Elegant Star Myanmar မှ ရန်ကုန်နှင့် မြန်မာနိုင်ငံအတွင်း မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်း၊ မင်္ဂလာလက်မှတ်ဖိုင်နှင့် လိုက်ဖက်ညီသော wedding stationery ဝန်ဆောင်မှုများကို ဖန်တီးပေးပါသည်။",
+    "Elegant Star Myanmar နှင့် Elegant Star Yangon မှ ရန်ကုန်နှင့် မြန်မာနိုင်ငံအတွင်း မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်း၊ မင်္ဂလာလက်မှတ်ဖိုင်နှင့် wedding stationery ဝန်ဆောင်မှုများကို ဖန်တီးပေးပါသည်။",
   alternates: {
     canonical: "/my",
     languages: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "မင်္ဂလာဖိတ်စာနှင့် ဖိတ်စာဝန်ဆောင်မှု | Elegant Star Myanmar",
     description:
-      "Elegant Star Myanmar တွင် ရန်ကုန်နှင့် မြန်မာနိုင်ငံအတွင်း မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်းနှင့် wedding stationery ဝန်ဆောင်မှုများကို ရှာဖွေပါ။",
+      "Elegant Star Myanmar, Elegant Star Yangon နှင့် Elegant Star invitation ဝန်ဆောင်မှုများအတွက် မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်းနှင့် wedding stationery များကို ကြည့်ရှုပါ။",
     url: "/my",
     locale: "my_MM",
     type: "website",
@@ -62,6 +62,14 @@ const keywordCards = [
     title: "Elegant Star Myanmar",
     copy: "Elegant Star Myanmar ကို ရှာဖွေနေသူများအတွက် ဖိတ်စာ၊ မင်္ဂလာဖိတ်စာ၊ wedding invitation service နှင့် wedding stationery ဝန်ဆောင်မှုများကို ဤစာမျက်နှာတွင် စုစည်းဖော်ပြထားပါသည်။",
   },
+  {
+    title: "Elegant Star Yangon",
+    copy: "Elegant Star Yangon သည် ရန်ကုန်အခြေစိုက် ဖိတ်စာနှင့် wedding stationery studio အဖြစ် custom invitation design နှင့် consultation ဝန်ဆောင်မှုများကို ပေးပါသည်။",
+  },
+  {
+    title: "Elegant Star invitation",
+    copy: "Elegant Star invitation ကို ရှာဖွေနေသူများအတွက် custom wedding invitation cards, certificate folders နှင့် coordinated stationery collections များကို ကြည့်ရှုနိုင်ပါသည်။",
+  },
 ] as const;
 
 export default function MyanmarHomePage() {
@@ -75,7 +83,7 @@ export default function MyanmarHomePage() {
         url: `${siteUrl}/my`,
         name: "မင်္ဂလာဖိတ်စာနှင့် ဖိတ်စာဝန်ဆောင်မှု မြန်မာနိုင်ငံ | Elegant Star Myanmar",
         description:
-          "Elegant Star Myanmar ၏ မြန်မာဘာသာ မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်းနှင့် wedding stationery ဝန်ဆောင်မှု မိတ်ဆက်စာမျက်နှာ။",
+          "Elegant Star Myanmar, Elegant Star Yangon နှင့် Elegant Star invitation အတွက် မြန်မာဘာသာ မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်းနှင့် wedding stationery ဝန်ဆောင်မှု မိတ်ဆက်စာမျက်နှာ။",
         inLanguage: "my",
         isPartOf: {
           "@id": `${siteUrl}/#website`,
@@ -102,7 +110,7 @@ export default function MyanmarHomePage() {
         data-nav-theme="light"
       >
         <div className="section-inner">
-          <p className="small-label text-brand-sage">Elegant Star Myanmar</p>
+          <p className="small-label text-brand-sage">Elegant Star Myanmar · Elegant Star Yangon</p>
           <h1 className="display-heading mt-4 max-w-[15ch] text-[clamp(2.7rem,10vw,5.2rem)] leading-[0.98] text-brand-olive">
             မင်္ဂလာဖိတ်စာနှင့် ဖိတ်စာဝန်ဆောင်မှု မြန်မာနိုင်ငံ
           </h1>
@@ -111,9 +119,6 @@ export default function MyanmarHomePage() {
             ဖိတ်စာနှင့် wedding stationery studio ဖြစ်ပြီး မင်္ဂလာဖိတ်စာ၊
             ဖိတ်စာဒီဇိုင်း၊ မင်္ဂလာလက်မှတ်ဖိုင်နှင့် လိုက်ဖက်ညီသော stationery
             pieces များကို အခမ်းအနားအလိုက် personalised ပြုလုပ်ပေးပါသည်။
-            Elegant Star Myanmar ကို ရှာဖွေနေသူများအတွက်လည်း အဓိက
-            ဖိတ်စာနှင့် မင်္ဂလာပွဲဆိုင်ရာ ဝန်ဆောင်မှုများကို ဤစာမျက်နှာတွင်
-            မြန်မာဘာသာဖြင့် စုစည်းဖော်ပြထားပါသည်။
           </p>
 
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold text-brand-olive">
@@ -150,8 +155,7 @@ export default function MyanmarHomePage() {
             <p className="body-copy mt-5 text-base leading-8 sm:text-lg">
               ရန်ကုန်နှင့် မြန်မာနိုင်ငံအတွင်း ဖိတ်စာ၊ မင်္ဂလာဖိတ်စာနှင့်
               မင်္ဂလာပွဲ stationery service များကို ရှာဖွေနေသူများအတွက်
-              Elegant Star Myanmar ၏ အဓိကဝန်ဆောင်မှုများကို အောက်တွင်
-              စုစည်းထားပါသည်။
+              Elegant Star ၏ အဓိကဝန်ဆောင်မှုများကို အောက်တွင် စုစည်းထားပါသည်။
             </p>
           </div>
 
