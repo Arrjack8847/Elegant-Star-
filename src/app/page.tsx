@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { EnvelopeHero } from "@/components/home/EnvelopeHero";
 import { SeamlessBrandIntroduction } from "@/components/home/SeamlessBrandIntroduction";
-import { YangonInvitationServices } from "@/components/home/YangonInvitationServices";
 import { InteractiveFeaturedCollections } from "@/components/home/InteractiveFeaturedCollections";
 import { ScrollDrivenStory } from "@/components/home/ScrollDrivenStory";
 import { VisualCategoryExplorer } from "@/components/home/VisualCategoryExplorer";
@@ -52,7 +51,6 @@ export default function HomePage() {
     <>
       <EnvelopeHero />
       <SeamlessBrandIntroduction />
-      <YangonInvitationServices />
       <InteractiveFeaturedCollections />
       <ScrollDrivenStory />
       <VisualCategoryExplorer />
