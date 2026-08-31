@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -119,13 +118,12 @@ export default async function StoryPage({
             className="max-w-[min(52rem,100%)]"
             start="top 84%"
           >
-            <Link
+            <a
               href="/stories"
-              scroll={true}
               className="inline-flex min-h-10 items-center gap-2 rounded-full text-sm font-bold text-brand-ivory/72 transition hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage"
             >
               <ArrowLeft size={17} /> All stories
-            </Link>
+            </a>
             <p className="small-label mt-8 text-brand-champagne">
               {story.eyebrow}
             </p>
@@ -190,9 +188,8 @@ export default async function StoryPage({
               Start an enquiry
             </EnquiryButton>
           </RevealGroup>
-          <Link
+          <a
             href={`/stories/${next.slug}`}
-            scroll={true}
             aria-label={`Next story: ${next.title}`}
             className="group mt-10 flex min-h-20 items-center justify-between gap-4 border-t border-brand-olive/12 py-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sage sm:gap-6"
           >
@@ -207,7 +204,7 @@ export default async function StoryPage({
               aria-hidden="true"
               className="shrink-0 transition-transform group-hover:translate-x-1"
             />
-          </Link>
+          </a>
         </div>
       </section>
     </>
