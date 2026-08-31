@@ -21,15 +21,15 @@ export function RequestOrderSummary({
   }
 
   return (
-    <div className="mt-4 flex items-center gap-3">
-      <div className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-brand-olive/10 bg-brand-paper sm:size-16">
+    <div className="mt-3 flex justify-center sm:mt-4">
+      <div className="relative size-12 shrink-0 overflow-hidden rounded-xl border border-brand-olive/10 bg-brand-paper sm:size-14 sm:rounded-2xl">
         <Image
           src={context.image ?? ""}
           alt={`${context.title} product photo`}
           fill
           loading="lazy"
           className="object-contain"
-          sizes="64px"
+          sizes="56px"
           onError={() => setImageFailed(true)}
         />
       </div>
