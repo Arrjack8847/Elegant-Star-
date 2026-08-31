@@ -5,8 +5,10 @@ import {
   useEffect,
   useId,
   useRef,
+  useState,
   type RefObject,
 } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import {
   buildViberShareUrl,
@@ -43,6 +45,7 @@ export function RequestOrderDialog({
   const descriptionId = useId();
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [portalReady, setPortalReady] = useState(false);
   const orderContext = normalizeContext(context);
 
   const handleViber = useCallback(() => {
@@ -59,6 +62,14 @@ export function RequestOrderDialog({
   }, [onClose, orderContext.pagePath, orderContext.slug, orderContext.title]);
 
   useEffect(() => {
+    setPortalReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!portalReady) {
+      return;
+    }
+
     const previousOverflow = document.body.style.overflow;
     const previousActiveElement =
       document.activeElement instanceof HTMLElement
@@ -81,7 +92,7 @@ export function RequestOrderDialog({
 
       const focusable = Array.from(
         sheetRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ),
       );
 
@@ -111,11 +122,15 @@ export function RequestOrderDialog({
         restoreFocusTarget.focus();
       }
     };
-  }, [onClose, returnFocusRef]);
+  }, [onClose, portalReady, returnFocusRef]);
 
-  return (
+  if (!portalReady) {
+    return null;
+  }
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[110] flex items-end justify-center bg-brand-olive/32 px-3 pb-[calc(0.75rem_+_env(safe-area-inset-bottom))] pt-[calc(0.75rem_+_env(safe-area-inset-top))] sm:items-center sm:px-4 sm:py-4"
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-brand-olive/36 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur-[2px] sm:px-4 sm:py-4"
       onPointerDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
@@ -128,16 +143,14 @@ export function RequestOrderDialog({
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
-        className="w-full max-w-[30rem] rounded-t-[28px] border border-brand-olive/12 bg-brand-ivory p-5 text-brand-olive shadow-[0_24px_70px_rgba(48,50,41,0.22)] sm:rounded-[28px] sm:p-6"
+        className="w-full max-w-[29rem] overflow-hidden rounded-[26px] border border-brand-olive/12 bg-brand-ivory p-4 text-brand-olive shadow-[0_28px_80px_rgba(48,50,41,0.28)] sm:rounded-[28px] sm:p-5"
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className="small-label text-brand-sage">
-              Request this design
-            </p>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="small-label text-brand-sage">Request this design</p>
             <h2
               id={titleId}
-              className="mt-3 break-words font-display text-[2.1rem] leading-[1.02] text-brand-olive sm:text-[2.45rem]"
+              className="mt-2 break-words font-display text-[1.75rem] leading-[1.02] text-brand-olive min-[390px]:text-[1.95rem] sm:text-[2.25rem]"
             >
               {orderContext.title}
             </h2>
@@ -148,9 +161,9 @@ export function RequestOrderDialog({
             type="button"
             aria-label="Close request order options"
             onClick={onClose}
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-olive/15 bg-brand-white/72 text-brand-olive transition hover:bg-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-champagne motion-reduce:transition-none"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-olive/15 bg-brand-white/72 text-brand-olive transition hover:bg-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-champagne motion-reduce:transition-none sm:size-11"
           >
-            <X size={18} strokeWidth={1.8} aria-hidden="true" />
+            <X size={17} strokeWidth={1.8} aria-hidden="true" />
           </button>
         </div>
 
@@ -158,12 +171,12 @@ export function RequestOrderDialog({
 
         <p
           id={descriptionId}
-          className="mt-4 text-sm font-bold leading-6 text-brand-olive/64"
+          className="mt-3 text-center text-sm font-bold leading-5 text-brand-olive/64 sm:mt-4 sm:leading-6"
         >
           Choose where you would like to continue.
         </p>
 
-        <div className="mt-5 grid gap-3">
+        <div className="mt-3 grid gap-2.5 sm:mt-4 sm:gap-3">
           <ChatChannelButton
             channel="messenger"
             ariaLabel={`Open Messenger to enquire about ${orderContext.title}`}
@@ -176,8 +189,9 @@ export function RequestOrderDialog({
           />
         </div>
 
-        <MessengerFallbackLinks className="mt-3" />
+        <MessengerFallbackLinks compact className="mt-2.5 sm:mt-3" />
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
