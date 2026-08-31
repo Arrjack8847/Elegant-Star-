@@ -1,25 +1,62 @@
 "use client";
 
 import {
-  useCallback,
   useEffect,
   useId,
   useRef,
   useState,
   type RefObject,
+  type SVGProps,
 } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
-import {
-  buildViberShareUrl,
-  openViberShareUrl,
-} from "@/lib/buildChatLinks";
-import { buildOrderMessage, type OrderContext } from "@/lib/buildOrderMessage";
-import { buildProductUrl } from "@/lib/buildProductUrl";
-import { MessengerFallbackLinks } from "@/components/contact/MessengerFallbackLinks";
-import { ChatChannelButton } from "@/components/enquiry/ChatChannelButton";
+import type { OrderContext } from "@/lib/buildOrderMessage";
 import { RequestOrderSummary } from "@/components/enquiry/RequestOrderSummary";
 import { contactDetails } from "@/data/site";
+
+function InstagramIcon({
+  size = 20,
+  ...props
+}: SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon({
+  size = 20,
+  ...props
+}: SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M14 8h3V4.5A8 8 0 0 0 14.5 4C11.9 4 10 5.7 10 8.8V11H7v4h3v5h4v-5h3.2l.8-4H14V8.8c0-.6.4-.8 1-.8Z" />
+    </svg>
+  );
+}
 
 function normalizeContext(context: OrderContext | undefined): OrderContext {
   const slug = context?.slug?.trim() || "elegant-star-design";
@@ -47,19 +84,6 @@ export function RequestOrderDialog({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [portalReady, setPortalReady] = useState(false);
   const orderContext = normalizeContext(context);
-
-  const handleViber = useCallback(() => {
-    const productUrl = buildProductUrl(
-      orderContext.pagePath ?? `/designs/${orderContext.slug}`,
-    );
-    const message = buildOrderMessage({
-      title: orderContext.title,
-      productUrl,
-    });
-
-    openViberShareUrl(buildViberShareUrl(message));
-    onClose();
-  }, [onClose, orderContext.pagePath, orderContext.slug, orderContext.title]);
 
   useEffect(() => {
     setPortalReady(true);
@@ -177,19 +201,28 @@ export function RequestOrderDialog({
         </p>
 
         <div className="mt-3 grid gap-2.5 sm:mt-4 sm:gap-3">
-          <ChatChannelButton
-            channel="messenger"
-            ariaLabel={`Open Messenger to enquire about ${orderContext.title}`}
-            href={contactDetails.messengerUrl}
-          />
-          <ChatChannelButton
-            channel="viber"
-            ariaLabel={`Share ${orderContext.title} through Viber`}
-            onClick={handleViber}
-          />
-        </div>
+          <a
+            href={contactDetails.instagram.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open Instagram to enquire about ${orderContext.title}`}
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-brand-olive/18 bg-brand-white/82 px-5 py-3 text-sm font-bold leading-snug text-brand-olive shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-champagne motion-reduce:transition-none"
+          >
+            <InstagramIcon size={18} aria-hidden="true" />
+            Continue with Instagram
+          </a>
 
-        <MessengerFallbackLinks compact className="mt-2.5 sm:mt-3" />
+          <a
+            href={contactDetails.facebook.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open Facebook to enquire about ${orderContext.title}`}
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-brand-olive bg-brand-olive px-5 py-3 text-sm font-bold leading-snug text-brand-ivory shadow-soft transition hover:-translate-y-0.5 hover:bg-[#3f4236] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-champagne motion-reduce:transition-none"
+          >
+            <FacebookIcon size={18} aria-hidden="true" />
+            Continue with Facebook
+          </a>
+        </div>
       </div>
     </div>,
     document.body,
