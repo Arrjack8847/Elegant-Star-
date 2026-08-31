@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { RealStory } from "@/data/stories";
 
@@ -11,9 +10,8 @@ export function StoryCard({
   large?: boolean;
 }) {
   return (
-    <Link
+    <a
       href={`/stories/${story.slug}`}
-      scroll={true}
       className="group motion-card-lift block rounded-[22px]"
     >
       <article>
@@ -48,6 +46,6 @@ export function StoryCard({
         </div>
         <p className="body-copy mt-4 text-sm">{story.description}</p>
       </article>
-    </Link>
+    </a>
   );
 }
