@@ -100,6 +100,22 @@ const collectionTitleOverrides: Record<string, string> = {
   "ES-080": "Fingerprint Tree",
 };
 
+const collectionImageExclusions: Record<string, Set<string>> = {
+  "kranok-pattern-certificate-collection": new Set([
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-12.jpg",
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-13.jpg",
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-14.jpg",
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-15.jpg",
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-16.jpg",
+    "/media/collections/special-one/kranok-pattern-certificate-collection/kranok-pattern-certificate-collection-image-17.jpg",
+  ]),
+};
+
+function filterCollectionImages(slug: string, values: string[]): string[] {
+  const excluded = collectionImageExclusions[slug];
+  return excluded ? values.filter((value) => !excluded.has(value)) : values;
+}
+
 function buildMaterials(category: CollectionCategory): string[] {
   switch (category) {
     case "Wedding Invitations":
@@ -139,8 +155,11 @@ export const invitationCollections: InvitationCollection[] =
   elegantStarCollections.map((sourceItem, index) => {
     const item = sourceItem as SourceCollection;
     const category = item.category as CollectionCategory;
-    const gallery = safeGallery(item);
-    const sourceImages = safeImageList(item.images);
+    const gallery = filterCollectionImages(item.slug, safeGallery(item));
+    const sourceImages = filterCollectionImages(
+      item.slug,
+      safeImageList(item.images),
+    );
     const images = sourceImages;
     const videos = safeVideoList(item.videos);
     const cover1 =
