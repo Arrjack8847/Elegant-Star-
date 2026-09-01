@@ -91,6 +91,15 @@ function buildReference(index: number): string {
   return `ES-${String(index + 1).padStart(3, "0")}`;
 }
 
+const collectionTitleOverrides: Record<string, string> = {
+  "ES-011": "Kanok Pattern Certificate Holder",
+  "ES-026": "Graceful Wedding Card",
+  "ES-037": "Unique Wedding Card",
+  "ES-065": "Rose Gold Certificate Holder",
+  "ES-078": "Custom Notebook",
+  "ES-080": "Fingerprint Tree",
+};
+
 function buildMaterials(category: CollectionCategory): string[] {
   switch (category) {
     case "Wedding Invitations":
@@ -151,12 +160,13 @@ export const invitationCollections: InvitationCollection[] =
       fallbackImage;
     const cardImage = cover1 || coverImage;
     const hoverImage = cover2 || cardImage;
+    const reference = buildReference(index);
 
     return {
       id: item.slug,
       slug: item.slug,
-      reference: buildReference(index),
-      name: item.title,
+      reference,
+      name: collectionTitleOverrides[reference] ?? item.title,
       categories: [category],
       shortDescription: item.description,
       fullDescription: `${item.description} This design can be personalised with wording, colour direction, quantity and coordinated presentation details during consultation.`,
