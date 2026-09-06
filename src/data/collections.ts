@@ -98,6 +98,7 @@ const collectionTitleOverrides: Record<string, string> = {
   "ES-065": "Rose Gold Certificate Holder",
   "ES-078": "Custom Notebook",
   "ES-080": "Fingerprint Tree",
+  "ES-084": "Bottle Opener",
 };
 
 const collectionImageExclusions: Record<string, Set<string>> = {
