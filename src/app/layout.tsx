@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { EnquiryProvider } from "@/components/enquiry/EnquiryProvider";
 import { FloatingNavbar } from "@/components/layout/FloatingNavbar";
@@ -208,6 +209,7 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <Footer />
         </EnquiryProvider>
+        <Analytics />
       </body>
     </html>
   );
