@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
-      { source: "/my", destination: "/", permanent: true },
+      { source: "/my", destination: "/", statusCode: 301 },
     ];
   },
   turbopack: {
