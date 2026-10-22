@@ -5,7 +5,6 @@ import { getConfiguredSiteUrl } from "@/lib/site-url";
 
 const routes = [
   "/",
-  "/my",
   "/wedding-service-myanmar",
   "/invitation-service-myanmar",
   "/collections",
