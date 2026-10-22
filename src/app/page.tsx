@@ -9,11 +9,12 @@ import { SimpleOrderingProcess } from "@/components/home/SimpleOrderingProcess";
 import { ClientTestimonial } from "@/components/home/ClientTestimonial";
 import { SocialMediaShowcase } from "@/components/home/SocialMediaShowcase";
 import { siteMedia } from "@/data/siteMedia";
+import { MyanmarInvitationSeo } from "@/components/home/MyanmarInvitationSeo";
 
 const homepageSearchImage = siteMedia.brand.openGraphImage;
 const homepageTitle = "Elegant Star Myanmar | Wedding Invitations & Stationery";
 const homepageDescription =
-  "Discover Elegant Star, a Yangon wedding invitation studio creating custom invitation cards, marriage certificate folders and coordinated stationery for celebrations across Myanmar.";
+  "Elegant Star Myanmar (Elegant Star Yangon) creates wedding invitations, custom invitation cards, marriage certificate folders and stationery in Yangon. မင်္ဂလာဖိတ်စာ၊ ဖိတ်စာဒီဇိုင်းနှင့် ရန်ကုန် ဖိတ်စာဝန်ဆောင်မှုများ။";
 
 export const metadata: Metadata = {
   title: { absolute: homepageTitle },
@@ -22,10 +23,26 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       en: "/",
-      my: "/my",
       "x-default": "/",
     },
   },
+  keywords: [
+    "Elegant Star Myanmar",
+    "Elegant Star Yangon",
+    "Elegant Star invitation",
+    "Elegant Star ဖိတ်စာ",
+    "ဖိတ်စာ",
+    "မင်္ဂလာဆောင် ဖိတ်စာ",
+    "မင်္ဂလာဖိတ်စာ",
+    "မင်္ဂလာဖိတ်စာ ဒီဇိုင်း",
+    "ရန်ကုန် ဖိတ်စာ",
+    "မြန်မာနိုင်ငံ ဖိတ်စာ",
+    "ဖိတ်စာ ဝန်ဆောင်မှု",
+    "မင်္ဂလာပွဲ ဝန်ဆောင်မှု",
+    "wedding invitations Myanmar",
+    "wedding invitation cards Yangon",
+    "marriage certificate folders Myanmar",
+  ],
   openGraph: {
     title: homepageTitle,
     description: homepageDescription,
@@ -58,6 +75,7 @@ export default function HomePage() {
       <SimpleOrderingProcess />
       <ClientTestimonial />
       <SocialMediaShowcase />
+      <MyanmarInvitationSeo />
     </>
   );
 }
